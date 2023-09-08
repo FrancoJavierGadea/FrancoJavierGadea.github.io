@@ -1,0 +1,93 @@
+---
+const REDES = {
+    whatsapp: '5493816065882',
+    mail: 'francogadea1812@gmail.com',
+
+    curriculum: 'https://raw.githubusercontent.com/FrancoJavierGadea/FrancoJavierGadea.github.io/main/Curriculum.pdf',
+    linkedin: 'https://www.linkedin.com/in/franco-javier-alvarez',
+    github: 'https://github.com/FrancoJavierGadea',
+}
+
+
+const {width = '500px', size = '22px'} = Astro.params;
+---
+
+
+<ul class="Redes" style={{width, fontSize: size}}>
+
+    <li>
+        <a href={REDES.curriculum} target="_blank" rel="noopener noreferrer" 
+        
+            style={{color: '#fa0f00'}}
+
+            title="Curriculum"
+        >
+            <i class="bi bi-file-earmark-pdf"></i>
+        </a>
+    </li>
+
+    <li>
+        <a href={`https://wa.me/${REDES.whatsapp}`} target="_blank" rel="noopener noreferrer" 
+        
+            style={{color: '#25d366'}}
+
+            title="Whatsapp"
+        >    
+            <i class="bi bi-whatsapp"></i>
+        </a>
+    </li>
+
+    
+    <li>
+        <a href={REDES.linkedin} target="_blank" rel="noopener noreferrer" 
+        
+            style={{color: '#0a66c2'}}
+            
+            title="Linkedin"
+            >   
+            <i class="bi bi-linkedin"></i>
+        </a>
+    </li>
+
+    <li>
+        <a href={REDES.github} target="_blank" rel="noopener noreferrer" 
+        
+            style={{color: '#fff'}}
+            
+            title="Github"
+            >
+            <i class="bi bi-github"></i>
+        </a>
+    </li>
+
+    <li>
+        <a href={`mailto:${REDES.mail}`} target="_blank" rel="noopener noreferrer" 
+        
+            style={{color: '#a7a7a7'}}
+
+            title="Mail"
+        >  
+            <i class="bi bi-envelope"></i>
+        </a>
+    </li>
+</ul>
+
+
+<style>
+
+    .Redes {
+
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        padding: 15px;
+    }
+
+    .Redes a i::before {
+        transition: scale 0.3s ease;
+    }
+    .Redes a:hover i::before {
+        scale: 1.2;
+    }
+
+</style>

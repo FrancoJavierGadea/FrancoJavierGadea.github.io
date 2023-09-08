@@ -1,0 +1,74 @@
+---
+import PerfilPhoto from "../assets/perfil.webp";
+import Redes from "./Redes.astro";
+import * as perfil from "../assets/description.md";
+
+const name = "Franco Javier Gadea";
+
+---
+
+
+
+<section class="Perfil">
+
+
+    <div class="Perfil-content">
+
+        <img class="Perfil-image" src={PerfilPhoto.src} alt={`Foto de perfil de ${name}`}>
+
+        <h1 class="Perfil-name">{name}</h1>
+
+        <Redes />
+
+        <article class="Perfil-description" set:html={perfil.compiledContent()}></article>
+    </div>
+
+</section>
+
+<style>
+    .Perfil {
+        margin: 15px 0;
+        padding-top: 10px;
+        backdrop-filter: blur(16px) saturate(180%);
+        background-color: #0000005c;
+        border-radius: 10px;
+        box-shadow: 7px 7px 20px 0px #0000005c;
+        max-width: 550px;
+
+        animation: fadein 3s ease;
+    }
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .Perfil-content {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+    .Perfil-image {
+        max-width: 200px;
+        border-radius: 50%;
+        filter: brightness(130%) drop-shadow(7px 7px 5px rgba(0,0,0,0.6));
+        backdrop-filter: blur(16px) saturate(120%);
+    }
+
+    .Perfil-name {
+        color: #f3b61f;
+    }
+
+    .Perfil-description {
+        padding: 10px;
+        color: white;
+    }
+    .Perfil-description p {
+        text-wrap: balance;
+    }
+</style>

@@ -1,0 +1,83 @@
+---
+import vLibros from "../assets/libros.mp4";
+import libros from "../assets/libros.jpg";
+import reactP from "../assets/react-playground.jpg";
+import vReactP from "../assets/react-playground.mp4";
+import rubik from "../assets/rubik.jpg";
+import vRubik from "../assets/rubik.mp4";
+import tictac from "../assets/tictactoe.jpg";
+import vTictac from "../assets/tictactoe.mp4";
+import Card from "./Card.astro";
+
+const projects = [
+    {
+        title: 'Libros - Midudev',
+        preview: {
+            image: libros.src,
+            video: vLibros
+        },
+        technologies: ['Astro', 'View transitions'],
+        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+    },
+    {
+        title: 'React playground',
+        preview: {
+            image: reactP.src,
+            video: vReactP
+        },
+        technologies: ['React', 'Monaco editor'],
+        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+    },
+    {
+        title: 'tic tac toe',
+        preview: {
+            image: tictac.src,
+            video: vTictac
+        },
+        technologies: ['React', 'socket.io'],
+        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+    },
+    {
+        title: 'Cubo de rubik',
+        preview: {
+            image: rubik.src,
+            video: vRubik
+        },
+        technologies: ['React', 'Three js'],
+        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+    },
+];
+---
+
+
+<section class="Projects">
+
+    <h2 class="py-2 mb-4 border-bottom border-2 border-primary">Proyectos</h2>
+
+    <div class="Projects-content">
+        {
+            projects.map(({title, preview, description, technologies}) => {
+
+                return <Card title={title} description={description} 
+                
+                    video={preview?.video} image={preview?.image} 
+
+                    technologies={technologies}
+                />
+            })
+        }
+    </div>
+</section>
+
+
+<style>
+    .Projects {
+        margin-top: 150px;
+    }
+    .Projects-content {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+</style>

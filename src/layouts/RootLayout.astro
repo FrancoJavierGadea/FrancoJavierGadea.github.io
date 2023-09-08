@@ -1,0 +1,42 @@
+--- 
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import Background from "../components/Background.astro";
+
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+
+<html lang="es" data-bs-theme="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description">
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+	</head>
+	<body>
+
+		<Background>
+
+			<Navigation />
+	
+			<slot />
+	
+			<Footer />
+			
+		</Background>
+
+	</body>
+</html>
+
+
+<style is:global>
+	
+</style>

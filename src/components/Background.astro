@@ -1,0 +1,48 @@
+---
+import Gargantua from "../assets/Gargantua.mp4";
+import GargantuaPoster from "../assets/Gargantua-poster.jpg";
+
+
+const {width = 'initial', height = '100svh'} = Astro.props;
+
+---
+
+<div class="Background">
+
+    <video class="Background-video" src={Gargantua} autoplay muted loop
+    
+        style={{backgroundImage: `url(${GargantuaPoster.src})`}}
+
+    ></video>
+
+    <div class="Background-content" style={`max-width: ${width}; max-height: ${height};`}>
+
+        <slot />
+
+    </div>
+</div>
+
+
+<style>
+
+    .Background {
+        position: relative;
+    }
+    .Background-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100svw;
+        height: 100svh;
+        object-fit: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        
+        z-index: 10;
+    }
+    .Background-content {
+        position: relative;
+        z-index: 21;
+    }
+</style>
