@@ -12,13 +12,15 @@ const {
 
     technologies = [],
 
+    url
+
 } = Astro.props;
 ---
 
 
 <custom-card>
 
-    <a class="Card" href={'/#'}>
+    <a class="Card" href={url} target="_blank">
     
         <div class="Card-preview">
     
@@ -62,7 +64,7 @@ const {
 
                 console.log('add listeners')
 
-                image.addEventListener('mouseenter', () => {
+                this.addEventListener('mouseenter', () => {
     
                     if(video.readyState === 4){
     
@@ -73,7 +75,7 @@ const {
                     }
                 })
     
-                video.addEventListener('mouseleave', () => {
+                this.addEventListener('mouseleave', () => {
     
                     if(video.readyState === 4){
     
@@ -95,6 +97,7 @@ const {
 <style>
     .Card {
         max-width: 250px;
+        height: 100%;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -117,7 +120,6 @@ const {
     .Card-preview {
         position: relative;
         width: 100%;
-        height: 100%;
     }
     .Card-image {
         width: 100%;
@@ -169,6 +171,7 @@ const {
     }
 
     .Card-technologies {
+        margin-top: auto;
         padding: 10px;
         display: flex;
         justify-content: end;

@@ -1,9 +1,8 @@
 ---
 import PerfilPhoto from "../assets/perfil.webp";
 import Redes from "./Redes.astro";
-import * as perfil from "../assets/description.md";
+import * as perfil from "../assets/perfil.md";
 
-const name = "Franco Javier Gadea";
 
 ---
 
@@ -11,16 +10,17 @@ const name = "Franco Javier Gadea";
 
 <section class="Perfil">
 
-
     <div class="Perfil-content">
 
-        <img class="Perfil-image" src={PerfilPhoto.src} alt={`Foto de perfil de ${name}`}>
+        <img class="Perfil-image" src={PerfilPhoto.src} alt={`Foto de perfil de ${perfil.frontmatter.name}`}>
 
-        <h1 class="Perfil-name">{name}</h1>
+        <h1 class="Perfil-name">{perfil.frontmatter.name}</h1>
 
         <Redes />
 
-        <article class="Perfil-description" set:html={perfil.compiledContent()}></article>
+        <article class="Perfil-description">
+            <perfil.Content />
+        </article>
     </div>
 
 </section>
@@ -33,7 +33,7 @@ const name = "Franco Javier Gadea";
         background-color: #0000005c;
         border-radius: 10px;
         box-shadow: 7px 7px 20px 0px #0000005c;
-        max-width: 550px;
+        max-width: 570px;
 
         animation: fadein 3s ease;
     }
@@ -62,13 +62,12 @@ const name = "Franco Javier Gadea";
 
     .Perfil-name {
         color: #f3b61f;
+        text-align: center;
     }
 
     .Perfil-description {
         padding: 10px;
         color: white;
     }
-    .Perfil-description p {
-        text-wrap: balance;
-    }
+    
 </style>

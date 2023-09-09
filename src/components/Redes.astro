@@ -13,7 +13,7 @@ const {width = '500px', size = '22px'} = Astro.params;
 ---
 
 
-<ul class="Redes" style={{width, fontSize: size}}>
+<ul class="Redes" style={{maxWidth: width, fontSize: size}}>
 
     <li>
         <a href={REDES.curriculum} target="_blank" rel="noopener noreferrer" 
@@ -81,6 +81,7 @@ const {width = '500px', size = '22px'} = Astro.params;
         justify-content: space-around;
         list-style: none;
         padding: 15px;
+        width: 100%;
     }
 
     .Redes a i::before {

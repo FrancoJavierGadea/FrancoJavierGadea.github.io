@@ -17,7 +17,9 @@ const projects = [
             video: vLibros
         },
         technologies: ['Astro', 'View transitions'],
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+        description: 'Prueba tecnica de Midudev: Una pequeña aplicación web de lista de libros',
+        deploy: 'https://libros1812.netlify.app',
+        github: '' 
     },
     {
         title: 'React playground',
@@ -26,7 +28,9 @@ const projects = [
             video: vReactP
         },
         technologies: ['React', 'Monaco editor'],
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+        description: 'Un playground de React en el cual probar a fondo la libreria',
+        deploy: 'https://francojaviergadea.github.io/React-playground',
+        github: '' 
     },
     {
         title: 'tic tac toe',
@@ -35,7 +39,9 @@ const projects = [
             video: vTictac
         },
         technologies: ['React', 'socket.io'],
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+        description: 'Tic Tac Toe online con chat hecho con Socket.io',
+        deploy: 'https://francojaviergadea.github.io/Tic-Tac-Toe',
+        github: '' 
     },
     {
         title: 'Cubo de rubik',
@@ -44,7 +50,9 @@ const projects = [
             video: vRubik
         },
         technologies: ['React', 'Three js'],
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti fugit obcaecati consequuntur! Accusantium quo dolores, ipsa exercitationem optio facilis fugiat fuga asperiores possimus dolorem totam obcaecati nam dolore unde impedit.'
+        description: 'Cubo de Rubik hecho con React y Three js',
+        deploy: 'https://francojaviergadea.github.io/Cubo-de-Rubik',
+        github: '' 
     },
 ];
 ---
@@ -56,13 +64,15 @@ const projects = [
 
     <div class="Projects-content">
         {
-            projects.map(({title, preview, description, technologies}) => {
+            projects.map(({title, preview, description, technologies, deploy}) => {
 
                 return <Card title={title} description={description} 
                 
                     video={preview?.video} image={preview?.image} 
 
                     technologies={technologies}
+
+                    url={deploy}
                 />
             })
         }
@@ -79,5 +89,6 @@ const projects = [
         gap: 25px;
         flex-wrap: wrap;
         justify-content: space-around;
+        align-items: stretch;
     }
 </style>
