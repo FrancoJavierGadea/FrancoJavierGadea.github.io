@@ -12,6 +12,11 @@ function getFolderName(path = ''){
     return path.split('/').at(-2);
 }
 
+function getFileName(path = ''){
+
+    return path.split('/').at(-1);
+}
+
 export async function getProjects(){
 
     const FILES = await import.meta.glob('./**/*.*');
@@ -23,6 +28,7 @@ export async function getProjects(){
         const acc = await accp;
 
         const folder = getFolderName(path);
+        const name = getFileName(path);
         const ext = getFileExtension(path);
 
         if(!acc[folder]){
@@ -42,7 +48,15 @@ export async function getProjects(){
         //Image
         if(['.webp', '.png', 'jpeg', 'jpg'].includes(ext)){
 
-            acc[folder]['content']['image'] = (await file()).default; 
+            if(name.split('.')[0] === 'favicon'){
+
+                acc[folder]['content']['favicon'] = (await file()).default; 
+            }
+            else {
+
+                acc[folder]['content']['image'] = (await file()).default; 
+            }
+
         }
 
         //Video

@@ -22,9 +22,23 @@ const {folder} = Astro.params;
 
 const PROJECTS = await getProjects();
 
+
+
 const {content} = PROJECTS[folder];
 
 const {title, description, technologies, github, deploy} = content?.markdown?.frontmatter;
+
+//Pagination
+const projectsArray = Object.entries(PROJECTS);
+
+const index = projectsArray.findIndex(([key]) => {
+
+    return key === folder;
+});
+
+const [nextProject] = projectsArray[index + 1] || [];
+
+const [previousProject] = projectsArray[index - 1] || [];
 ---
 
 
@@ -42,7 +56,23 @@ const {title, description, technologies, github, deploy} = content?.markdown?.fr
         </div>
 
         <div>
-            <ProjectPreview video={content?.video} title={title} url={deploy} github={github} />
+
+            <ProjectPreview 
+
+                video={content?.video}
+
+                favicon={content.favicon?.src}
+
+                title={title} 
+
+                url={deploy} 
+
+                github={github} 
+
+                next={nextProject ? `/proyectos/${nextProject}` : null}
+
+                previous={previousProject ? `/proyectos/${previousProject}` : null}
+            />
 
         </div>
   

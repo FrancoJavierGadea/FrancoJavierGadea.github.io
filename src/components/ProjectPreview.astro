@@ -1,11 +1,17 @@
 ---
 import Browser from "@layouts/Browser.astro";
-const {video, title, url, github} = Astro.props;
+const {video, favicon, title, url, github, next, previous} = Astro.props;
 ---
 
 <div class="Project-preview">
 
-    <Browser url={url} title={title} github={github} video={video}>
+    <Browser 
+        video={video} favicon={favicon}
+
+        url={url} title={title} github={github} 
+    
+        next={next} previous={previous}
+    >
     
         <div class="Preview-content">
 
@@ -18,7 +24,6 @@ const {video, title, url, github} = Astro.props;
 
     </Browser>
 
-
     <!-- Modal -->
     <custom-modal>
         <div class="modal fade" id="exampleModal" data-bs-backdrop="false">
@@ -27,7 +32,16 @@ const {video, title, url, github} = Astro.props;
                 <div class="modal-content">
         
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">{title}</h1>
+
+                        <div class="Project-data">
+
+                            {
+                                favicon && <i class="favicon" style={{backgroundImage: `url("${favicon}")`}}></i>
+                            }
+    
+                            <h1 class="modal-title">{title}</h1>
+
+                        </div>
 
                         <div class="Project-links">
 
@@ -145,20 +159,33 @@ const {video, title, url, github} = Astro.props;
     .modal-header:hover {
         opacity: 1;
     }
-    .modal-title {
-        color: #f3b61f;
-    }
 
-    .Project-links {
-        margin-left: auto;
+    .modal-header .Project-data {
         display: flex;
+        align-items: center;
         gap: 20px;
     }
-    .Project-links a .bi {
-        color: white;
-        font-size: 18px;
+    .modal-header .Project-data .modal-title {
+        color: #f3b61f;
+        font-size: 30px;
     }
-    .Project-links a:hover .bi {
+    .modal-header .Project-data .favicon {
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .modal-header .Project-links {
+        margin-left: auto;
+        display: flex;
+        gap: 50px;
+    }
+    .modal-header .Project-links a .bi {
+        color: white;
+        font-size: 30px;
+    }
+    .modal-header .Project-links a:hover .bi {
         color: #f3b61f;
     }
 </style>

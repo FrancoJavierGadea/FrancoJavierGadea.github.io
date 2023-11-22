@@ -1,5 +1,8 @@
 ---
-const { title, url, video, github } = Astro.props;
+const { title, url, video, github, next, previous, favicon } = Astro.props;
+
+console.log(favicon);
+
 ---
 
 
@@ -13,7 +16,12 @@ const { title, url, video, github } = Astro.props;
         </div>
 
         <div class="tab">
-            <i class="bi bi-youtube"></i>
+            {
+                favicon ?
+                    <i class="favicon" style={{backgroundImage: `url("${favicon}")`}}></i>
+                :
+                    <i class="bi bi-globe-americas"></i>
+            }
 
             <span class="tab-title">{title}</span>
 
@@ -24,8 +32,25 @@ const { title, url, video, github } = Astro.props;
     </div>
 
     <div class="Browser-nav">
-        <i class="bi bi-arrow-left"></i>
-        <i class="bi bi-arrow-right"></i>
+
+        {
+            previous ? 
+                <a href={previous} title="Anterior">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+            :
+            <i class="bi bi-arrow-left"></i>
+        }
+
+        {
+            next ? 
+                <a href={next} title="Siguiente">
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            :
+            <i class="bi bi-arrow-right"></i>
+        }
+        
         <i class="bi bi-arrow-clockwise" style={{rotate: '30deg'}}></i>
 
         <div class="Browser-nav-url">
@@ -134,12 +159,21 @@ const { title, url, video, github } = Astro.props;
 
     .Browser .bi {
         font-size: var(--browser-icon-size);
+        color: #86888a;
+    }
+    .Browser a .bi {
+        font-size: var(--browser-icon-size);
         color: #fff;
     }
-    
     .Browser a:hover,
     .Browser a:hover .bi {
         color: #f3b61f;
     }
     
+    .favicon {
+        width: var(--browser-icon-size);
+        height: var(--browser-icon-size);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 </style>
