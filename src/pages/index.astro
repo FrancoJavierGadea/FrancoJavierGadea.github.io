@@ -1,6 +1,5 @@
 ---
-import Background from '../components/Background.astro';
-import Card from '../components/Card.astro';
+
 import Footer from '../components/Footer.astro';
 import Perfil from '../components/Perfil.astro';
 import Projects from '../components/Projects.astro';
@@ -10,18 +9,20 @@ import RootLayout from '../layouts/RootLayout.astro';
 
 <RootLayout title="Franco Javier Gadea">
 
-	<main class="container">
+	<main >
+
+		<div class="container">
+
+			<Perfil />
+	
+			<Projects />
+
+		</div>
 			
-		<Perfil />
-
-		<Projects />
-
-		<Footer />
 
 	</main>
 
 </RootLayout>
 
 <style>
-	
 </style>

@@ -12,11 +12,15 @@ import * as perfil from "../assets/perfil.md";
 
     <div class="Perfil-content">
 
-        <img class="Perfil-image" src={PerfilPhoto.src} alt={`Foto de perfil de ${perfil.frontmatter.name}`}>
+        <div class="Perfil-data">
 
-        <h1 class="Perfil-name">{perfil.frontmatter.name}</h1>
+            <img class="Perfil-image" src={PerfilPhoto.src} alt={`Foto de perfil de ${perfil.frontmatter.name}`}>
+    
+            <h1 class="Perfil-name">{perfil.frontmatter.name}</h1>
+    
+            <Redes />
+        </div>
 
-        <Redes />
 
         <article class="Perfil-description">
             <perfil.Content />
@@ -27,40 +31,33 @@ import * as perfil from "../assets/perfil.md";
 
 <style>
     .Perfil {
-        margin: 15px 0;
-        padding-top: 10px;
-        backdrop-filter: blur(16px) saturate(180%);
-        background-color: #0000005c;
-        border-radius: 10px;
-        box-shadow: 7px 7px 20px 0px #0000005c;
-        max-width: 570px;
+        margin: 0;
+        padding-top: 0px;
 
-        animation: fadein 3s ease;
-    }
-
-    @keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+        width: fit-content;
     }
 
     .Perfil-content {
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 10px;
+    }
+    .Perfil-data {
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        gap: 20px;
+        width: 80%;
     }
     .Perfil-image {
         max-width: 200px;
         border-radius: 50%;
         filter: brightness(130%) drop-shadow(7px 7px 5px rgba(0,0,0,0.6));
-        backdrop-filter: blur(16px) saturate(120%);
+/*         backdrop-filter: blur(16px) saturate(120%); */
     }
 
     .Perfil-name {
+        color: #0453ff;
         color: #f3b61f;
         text-align: center;
     }
@@ -68,6 +65,13 @@ import * as perfil from "../assets/perfil.md";
     .Perfil-description {
         padding: 10px;
         color: white;
+    }
+    .Perfil-description :global(p) {
+        text-wrap: balance;
+        width: 90ch;
+    }
+    .Perfil-description :global(p strong) {
+        color: #f3b61f;
     }
     
 </style>

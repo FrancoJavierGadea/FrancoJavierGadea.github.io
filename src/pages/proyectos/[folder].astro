@@ -1,0 +1,95 @@
+---
+
+import ProjectPreview from '@components/ProjectPreview.astro';
+import RootLayout from '../../layouts/RootLayout.astro';
+import {getProjects} from "@Projects/index.js";
+
+export async function getStaticPaths() {
+    
+    const PROJECTS = await getProjects();
+    
+    return Object.values(PROJECTS).map((project) => {
+
+        return {
+            params: {
+                folder: project.folder
+            }
+        };
+    });
+}
+
+const {folder} = Astro.params;
+
+const PROJECTS = await getProjects();
+
+const {content} = PROJECTS[folder];
+
+const {title, description, technologies, github, deploy} = content?.markdown?.frontmatter;
+---
+
+
+<RootLayout title={title}>
+
+
+    <section class="Project container px-0">
+
+        <div class="">
+
+            <h1 class="Project-title">{title}</h1>
+
+            <p>{description}</p>
+
+        </div>
+
+        <div>
+            <ProjectPreview video={content?.video} title={title} url={deploy} github={github} />
+
+        </div>
+  
+
+    </section>
+
+</RootLayout>
+
+
+<style>
+
+    .Project {
+        padding-top: 50px;
+        display: flex;
+        justify-content: space-between;
+        
+        gap: 20px;
+    }
+
+
+    .Project-title {
+        color: #f3b61f;
+        font-size: clamp(30px, 10vw, 50px);
+        text-transform: capitalize;
+        text-wrap: balance;
+    }
+
+    @media (max-width: 991.98px){
+
+        .Project {
+            justify-content: center;
+            flex-wrap: wrap-reverse;
+        }
+        .Project-title {
+            text-align: center;
+        }
+    }
+
+    .Project-links {
+        display: flex;
+        gap: 20px;
+        justify-content: space-evenly;
+    }
+    .Project-links a {
+        text-decoration: none;
+        font-size: clamp(20px, 5vw, 35px);
+    }
+
+
+</style>

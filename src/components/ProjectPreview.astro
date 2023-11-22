@@ -1,0 +1,164 @@
+---
+import Browser from "@layouts/Browser.astro";
+const {video, title, url, github} = Astro.props;
+---
+
+<div class="Project-preview">
+
+    <Browser url={url} title={title} github={github} video={video}>
+    
+        <div class="Preview-content">
+
+            <video class="Preview-video" src={video} muted loop autoplay></video>
+
+            <button type="button" class="Preview-btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-arrows-angle-expand"></i>
+            </button>
+        </div>
+
+    </Browser>
+
+
+    <!-- Modal -->
+    <custom-modal>
+        <div class="modal fade" id="exampleModal" data-bs-backdrop="false">
+        
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+        
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">{title}</h1>
+
+                        <div class="Project-links">
+
+                            <a href={url} target="_blank" rel="noopener noreferrer" title="Ver Sitio" >
+                                <i class="bi bi-arrow-up-right-square"></i>
+                            </a>
+    
+                            <a href={github} target="_blank" rel="noopener noreferrer" title="Ver Github" >
+                                <i class="bi bi-github"></i>
+                            </a>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                    </div>
+        
+                    <div class="modal-body p-0">
+        
+                        <video class="Preview-video" src={video} muted loop autoplay controls></video>
+                    </div>
+        
+                </div>
+            </div>
+        
+        </div>
+    </custom-modal>
+
+</div>
+
+<script>
+    class Modal extends HTMLElement {
+
+        constructor(){
+            super();
+
+            const $modal = this.querySelector('.modal');
+
+            $modal.addEventListener('show.bs.modal', () => {
+
+                document.querySelector('.Background-content').style.overflowY = 'hidden';
+
+                //! Fix position fixed issue when scrolling
+                document.querySelector('.Page-content').style.backdropFilter = 'none';
+            });
+
+            $modal.addEventListener('hide.bs.modal', () => {
+
+                document.querySelector('.Background-content').style.overflowY = '';
+                document.querySelector('.Page-content').style.backdropFilter = '';
+            });
+        }
+    }
+
+    customElements.define('custom-modal', Modal);
+</script>
+
+
+<style>
+    .Preview-content {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .Preview-content > * {
+        grid-row-start: 1;
+        grid-column-start: 1;
+    }
+
+
+    .Preview-btn {
+        z-index: 1500;
+        opacity: 0;
+        transition: opacity 0.5s;
+        background-color: #00000092;
+        border-radius: 0;
+    }
+    .Preview-btn .bi {
+        font-size: 50px;
+    }
+    .Preview-content:hover .Preview-btn {
+        opacity: 1;
+    }
+
+    /* Video */
+    .Preview-video {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+    }
+
+    /* Modal */
+    .modal {
+        width: 100vw;
+        height: 100vh;
+    }
+    .modal-content {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .modal-content > * {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        overflow: hidden;
+    }
+
+    .modal-header {
+        z-index: 3100;
+        align-self: self-start;
+        opacity: 0;
+        transition: opacity 0.5s;
+        background: linear-gradient(to bottom,#000000 30%,transparent 100%);
+        height: 170px;
+        border: none;
+        align-items: flex-start;
+    }
+    .modal-header:hover {
+        opacity: 1;
+    }
+    .modal-title {
+        color: #f3b61f;
+    }
+
+    .Project-links {
+        margin-left: auto;
+        display: flex;
+        gap: 20px;
+    }
+    .Project-links a .bi {
+        color: white;
+        font-size: 18px;
+    }
+    .Project-links a:hover .bi {
+        color: #f3b61f;
+    }
+</style>

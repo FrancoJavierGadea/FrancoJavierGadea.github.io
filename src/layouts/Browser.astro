@@ -1,0 +1,145 @@
+---
+const { title, url, video, github } = Astro.props;
+---
+
+
+<div class="Browser">
+
+    <div class="Browser-tabs">
+        <div class="dots">
+            <span style={{backgroundColor: '#ff6058'}}></span>
+            <span style={{backgroundColor: '#e1a325'}}></span>
+            <span style={{backgroundColor: '#27ca40'}}></span>
+        </div>
+
+        <div class="tab">
+            <i class="bi bi-youtube"></i>
+
+            <span class="tab-title">{title}</span>
+
+            <a href="/">
+                <i class="bi bi-x"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="Browser-nav">
+        <i class="bi bi-arrow-left"></i>
+        <i class="bi bi-arrow-right"></i>
+        <i class="bi bi-arrow-clockwise" style={{rotate: '30deg'}}></i>
+
+        <div class="Browser-nav-url">
+            <i class="bi bi-lock-fill"></i>
+
+            <a class="url" href={url} target="_blank" rel="noopener noreferrer" title="Ver sitio">{url}</a>
+
+            <i class="bi bi-star"></i>
+        </div>
+
+        {
+            github ?
+                <a href={github} target="_blank" rel="noopener noreferrer" title="Ver Github" >
+                    <i class="bi bi-github"></i>
+                </a>
+            :
+                <i class="bi bi-person-circle"></i>
+        }
+
+        <i class="bi bi-three-dots-vertical"></i>
+    </div>
+
+    <div class="Browser-content">
+
+        <slot />
+    </div>
+
+    
+</div>
+
+
+
+<style>
+    .Browser {
+        --browser-gap: 10px;
+        --browser-text-size: 10px;
+        --browser-icon-size: 14px;
+        border-radius: 10px;
+        overflow: hidden;
+        max-width: 650px;
+    }
+
+    .Browser-tabs {
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        gap: calc(var(--browser-gap) + 5px);
+        padding-bottom: 0;
+        background-color: #202124;
+    }
+    .Browser-tabs .dots {
+        display: flex;
+        gap: 7px;
+    }
+    .Browser-tabs .dots span {
+        --dot-size: 10px;
+        width: var(--dot-size);
+        height: var(--dot-size);
+        border-radius: 50%;
+    }
+    .Browser-tabs .tab {
+        background-color: #35363a;
+        display: flex;
+        align-items: center;
+        padding: 2px 10px;
+        gap: var(--browser-gap);
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    .Browser-tabs .tab .tab-title {
+        flex-grow: 1;
+        
+    }
+
+    .Browser-nav {
+        display: flex;
+        background-color: #35363a;
+        align-items: center;
+        padding: 5px 10px;
+        gap: var(--browser-gap);
+    }
+
+    .Browser-nav-url {
+        flex-grow: 1;
+        align-items: center;
+
+        background-color: #202124;
+        display: flex;
+        gap: 5px;
+
+        padding: 2px 7px;
+        border-radius: 10px;
+    }
+    .Browser-nav-url .url {
+        flex-grow: 1;
+        text-decoration: none;
+        color: #86888a;
+        letter-spacing: 1px;
+    }
+
+    
+    .Browser-nav-url .url,
+    .Browser-tabs .tab .tab-title {
+        font-size: var(--browser-text-size);
+    }
+
+    .Browser .bi {
+        font-size: var(--browser-icon-size);
+        color: #fff;
+    }
+    
+    .Browser a:hover,
+    .Browser a:hover .bi {
+        color: #f3b61f;
+    }
+    
+</style>

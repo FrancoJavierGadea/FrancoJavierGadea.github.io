@@ -8,12 +8,3 @@ Mi interés en el desarrollo web se centra en crear soluciones **creativas e inn
 
 En mi portfolio encontrarás algunos de los proyectos en los que he trabajado, desde aplicaciones web simples hasta complejos juegos en línea. Si buscas un **desarrollador comprometido**, ¡contáctame!
 
-
-<style>
-    p {
-        text-wrap: balance;
-    }
-    p strong {
-        color: #f3b61f;
-    }
-</style>

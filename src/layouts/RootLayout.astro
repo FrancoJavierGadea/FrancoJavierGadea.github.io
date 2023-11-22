@@ -1,9 +1,12 @@
 --- 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle.js?url";
+
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import Background from "../components/Background.astro";
+import { ViewTransitions, fade } from "astro:transitions";
 
 
 const { title } = Astro.props;
@@ -21,23 +24,70 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 		<title>{title}</title>
+
+		<ViewTransitions />
 	</head>
 	<body>
 
 		<Background>
 
-			<!-- <Navigation /> -->
-	
-			<slot />
-	
-			<!-- <Footer />
- -->
+			<div class="Page-content">
+
+				
+				<Navigation />
+		
+				<main>
+
+					<slot />
+
+				</main>
+		
+				<Footer />
+
+				
+
+			</div>
+
 		</Background>
+
+
+		<script src={bootstrap}></script>
 
 	</body>
 </html>
 
 
 <style is:global>
-	
+
+	.Page-content {
+		backdrop-filter: blur(8px) saturate(180%);
+        background-color: #00000077;
+        border-radius: 10px;
+
+		
+
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	main {
+		animation: fadein 1s ease-in;
+	}
+
+	@keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+	.modal-backdrop {
+		z-index: 3000;
+	}
+	.modal {
+		z-index: 3100;
+	}
 </style>
