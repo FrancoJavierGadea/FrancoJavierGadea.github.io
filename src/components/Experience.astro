@@ -1,0 +1,138 @@
+---
+import { getExperience } from "@Data/Experience/index.js";
+
+const EXPERIENCE = await getExperience();
+
+const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
+
+    if(A.date < B.date) return 1;
+
+    if(A.date > B.date) return -1;
+
+    return 0;
+});
+
+---
+
+<section class="Experience">
+
+    <h2 class="Experience-title">Experiencia</h2>
+
+    <div class="Experience-content">
+
+        {
+            ORDER_EXPERIENCE.map(({content, date}) => {
+
+                const {logo, markdown} = content;
+
+                const dateString = date.toLocaleDateString('es-AR', {month: 'long', year: 'numeric'});
+
+                return <div class="Experience-item">
+
+                    {
+                        /* logo && <img class="logo" src={logo.src} alt="" /> */
+                    }
+
+                    <div class="Experience-item-info">
+
+                        <a href={markdown.frontmatter.url} target="_blank" rel="noopener noreferrer">
+                            
+                            <h4 class="title">{markdown.frontmatter.title}</h4>
+                        </a>
+    
+                        <p class="date">{dateString}</p>
+                    </div>
+  
+                </div>
+            })
+        }
+    </div>
+
+</section>
+
+<style>
+    .Experience {
+        margin-top: 50px;
+    }
+
+    .Experience-title {
+        padding-top: 20px;
+        padding-bottom: 15px;
+        font-size: 40px;
+        border-bottom: 2px solid #002fff;
+    }
+
+    .Experience-content {
+        padding: 50px;
+        padding-top: 0;
+        display: flex;
+        gap: 0;
+        flex-direction: column;
+    }
+
+    .Experience-item {
+        padding: 20px;
+        padding-left: 40px;
+        position: relative;
+
+        --timeline-line-width: 2px;
+        --timeline-line-color: #002fff79;
+        --timeline-icon-color: #ffffff;
+
+        display: flex;
+        gap: 10px;
+    }
+    .Experience-item::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        content: "";
+        display: block;
+        width: var(--timeline-line-width);
+        height: 100%;
+        background-color: var(--timeline-line-color);
+    }
+    .Experience-item:first-child::before {
+        height: 50%;
+        bottom: 0;
+        top: initial;
+    }
+    .Experience-item:last-child::before {
+        height: 50%;
+        top: 0;
+        bottom: initial;
+    }
+
+    .Experience-item::after {
+        content: "\f287";
+        content: "\f1ff";
+        font-size: 20px;
+        font-family: 'bootstrap-icons';
+        position: absolute;
+        top: 0;
+        left: -9px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        color: var(--timeline-icon-color);
+    }
+
+    .Experience-item-info {
+        position: relative;
+        top: 22px;
+    }
+    .Experience-item-info a {
+        text-decoration: none;
+    }
+    .Experience-item-info .title {
+        color: #f3b61f;
+    }
+    .Experience-item-info .date::first-letter {
+        text-transform: capitalize;
+    }
+
+    .Experience-item .logo {
+        max-width: 100px;
+        object-fit: scale-down;
+    }
+</style>

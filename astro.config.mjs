@@ -1,11 +1,19 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
-import netlify from "@astrojs/netlify/functions";
+import rehypeExternalLinks from "rehype-external-links";
 
-import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), mdx()],
-  output: "static"
+
+    integrations: [react()],
+
+    output: "static",
+
+    markdown: {
+        rehypePlugins: [
+
+            [rehypeExternalLinks, {target: "_blank", rel: "noopener noreferrer"}],
+        ],
+    },
 });

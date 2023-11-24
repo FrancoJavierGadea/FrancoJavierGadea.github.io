@@ -18,7 +18,7 @@ console.log(favicon);
         <div class="tab">
             {
                 favicon ?
-                    <i class="favicon" style={{backgroundImage: `url("${favicon}")`}}></i>
+                    <img class="favicon" src={favicon} alt={`Logo de ${title}`} />
                 :
                     <i class="bi bi-globe-americas"></i>
             }
@@ -146,9 +146,19 @@ console.log(favicon);
     }
     .Browser-nav-url .url {
         flex-grow: 1;
+
         text-decoration: none;
         color: #86888a;
         letter-spacing: 1px;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        @media (max-width: 575.98px) {
+            width: 200px;
+        }
+
     }
 
     
@@ -173,7 +183,6 @@ console.log(favicon);
     .favicon {
         width: var(--browser-icon-size);
         height: var(--browser-icon-size);
-        background-size: cover;
-        background-repeat: no-repeat;
+        object-fit: scale-down;
     }
 </style>

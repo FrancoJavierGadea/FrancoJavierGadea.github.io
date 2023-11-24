@@ -24,16 +24,16 @@ const {
     
         <div class="Card-preview">
     
-            <img class="Card-image" src={image} alt={`Foto de `}>
+            <img class="Card-image" src={image} alt={`Foto de ${title}`}>
 
             { video &&
                 <video class="Card-video hide-video" src={video} muted loop></video>
             }
         </div>
     
-        <h3 class="Card-title px-2">{title}</h3>
+        <h3 class="Card-title">{title}</h3>
 
-        <p class="Card-description px-2">
+        <p class="Card-description">
             {description}
         </p>
 
@@ -96,7 +96,7 @@ const {
 
 <style>
     .Card {
-        max-width: 250px;
+        max-width: 270px;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -118,24 +118,24 @@ const {
     }
 
     .Card-preview {
-        position: relative;
         width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
     }
+    .Card-preview > * {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+
     .Card-image {
         width: 100%;
-        aspect-ratio: 16 / 9;
-        position: relative;
-        top: 0;
-        left: 0;
+        aspect-ratio: 2;
         object-fit: cover;
         z-index: 1100;
     }
     .Card-video {
         width: 100%;
-        aspect-ratio: 16 / 9;
-        position: absolute;
-        top: 0;
-        left: 0;
+        aspect-ratio: 2;
         object-fit: cover;
         z-index: 1105;
     }
@@ -152,12 +152,15 @@ const {
 
     .Card-title {
         color: #f3b61f;
+        padding: 0 10px;
     }
     .Card-title::first-letter {
         text-transform: capitalize;
     }
 
     .Card-description {
+        padding: 0 10px;
+
         word-wrap: break-word;
         overflow: hidden;
 

@@ -36,7 +36,7 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
                         <div class="Project-data">
 
                             {
-                                favicon && <i class="favicon" style={{backgroundImage: `url("${favicon}")`}}></i>
+                                favicon && <img class="favicon" src={favicon} alt={`Logo de ${title}`} />
                             }
     
                             <h1 class="modal-title">{title}</h1>
@@ -49,9 +49,12 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
                                 <i class="bi bi-arrow-up-right-square"></i>
                             </a>
     
-                            <a href={github} target="_blank" rel="noopener noreferrer" title="Ver Github" >
-                                <i class="bi bi-github"></i>
-                            </a>
+                            {
+                                github &&
+                                <a href={github} target="_blank" rel="noopener noreferrer" title="Ver Github" >
+                                    <i class="bi bi-github"></i>
+                                </a>
+                            }
 
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
@@ -72,6 +75,8 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
 </div>
 
 <script>
+    //@ts-nocheck 
+
     class Modal extends HTMLElement {
 
         constructor(){
@@ -85,12 +90,33 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
 
                 //! Fix position fixed issue when scrolling
                 document.querySelector('.Page-content').style.backdropFilter = 'none';
+
+
+                alert(window.matchMedia('(hover: none)').matches)
+
+                //Mobile lock orientation
+                if(window.matchMedia('(hover: none)').matches){
+  
+                    document.documentElement.requestFullscreen();
+
+                    screen.orientation.lock("landscape");   
+                }
             });
 
             $modal.addEventListener('hide.bs.modal', () => {
 
                 document.querySelector('.Background-content').style.overflowY = '';
+                
+                //! Fix position fixed issue when scrolling
                 document.querySelector('.Page-content').style.backdropFilter = '';
+
+                //Mobile unlock orientation
+                if(window.matchMedia('(hover: none)').matches){
+
+                    screen.orientation.unlock();
+                    
+                    document.exitFullscreen();
+                }
             });
         }
     }
@@ -128,7 +154,7 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
     .Preview-video {
         width: 100%;
         height: 100%;
-        object-fit: fill;
+        object-fit: scale-down;
     }
 
     /* Modal */
@@ -155,6 +181,10 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
         height: 170px;
         border: none;
         align-items: flex-start;
+
+        @media (hover: none) {
+            opacity: 1;
+        }
     }
     .modal-header:hover {
         opacity: 1;
@@ -172,8 +202,7 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
     .modal-header .Project-data .favicon {
         width: 30px;
         height: 30px;
-        background-size: cover;
-        background-repeat: no-repeat;
+        object-fit: scale-down;
     }
 
     .modal-header .Project-links {
@@ -188,4 +217,6 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
     .modal-header .Project-links a:hover .bi {
         color: #f3b61f;
     }
+
+    
 </style>

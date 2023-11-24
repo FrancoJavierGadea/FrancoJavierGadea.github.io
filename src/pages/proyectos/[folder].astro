@@ -45,13 +45,26 @@ const [previousProject] = projectsArray[index - 1] || [];
 <RootLayout title={title}>
 
 
-    <section class="Project container px-0">
+    <section class="Project container">
 
-        <div class="">
+        <div class="Project-data">
 
             <h1 class="Project-title">{title}</h1>
 
-            <p>{description}</p>
+            <div class="Project-technologies">
+                {
+                    technologies.map(name => {
+    
+                        return <span class="badge pill bg-primary">{name}</span>
+                    })
+                }
+            </div>
+
+            <article class="Project-description">
+
+                <content.markdown.Content />
+
+            </article>
 
         </div>
 
@@ -85,41 +98,84 @@ const [previousProject] = projectsArray[index - 1] || [];
 <style>
 
     .Project {
-        padding-top: 50px;
+        padding: 50px 0;
         display: flex;
         justify-content: space-between;
         
         gap: 20px;
     }
 
+    .Project-data {
+        max-width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
-    .Project-title {
+    .Project-data .Project-title {
         color: #f3b61f;
         font-size: clamp(30px, 10vw, 50px);
         text-transform: capitalize;
         text-wrap: balance;
     }
 
-    @media (max-width: 991.98px){
+    .Project-data .Project-technologies {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        gap: 10px;
+    }
+    .Project-data .Project-technologies span {
+        font-size: 15px;
+    }
+
+    .Project-data .Project-description {
+        padding-top: 30px;
+    }
+    .Project-data .Project-description :global(p) {
+        text-wrap: balance;
+        width: 100%;
+        max-width: 90ch;
+        font-size: 18px;
+        line-height: 30px;
+    }
+    .Project-data .Project-description :global(p strong),
+    .Project-data .Project-description :global(p a) {
+        color: #f3b61f;
+        text-decoration: none;
+    }
+
+    .Project-data .Project-description :global(code) {
+        background-color: #5d6573;
+        padding: .2em .4em;
+        border-radius: 6px;
+        color: white;
+        white-space: nowrap;
+    }
+
+
+    @media (max-width: 1199.98px){
 
         .Project {
             justify-content: center;
             flex-wrap: wrap-reverse;
         }
+        .Project-data {
+            max-width: initial;
+        }
         .Project-title {
             text-align: center;
         }
-    }
 
-    .Project-links {
-        display: flex;
-        gap: 20px;
-        justify-content: space-evenly;
+        .Project-data .Project-technologies {
+            justify-content: center;
+        }
     }
-    .Project-links a {
-        text-decoration: none;
-        font-size: clamp(20px, 5vw, 35px);
+    @media (max-width: 575.98px) {
+        .Project {
+            padding: 50px 10px;
+        }
     }
-
+    
 
 </style>
