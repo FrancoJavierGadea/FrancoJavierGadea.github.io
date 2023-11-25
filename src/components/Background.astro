@@ -54,5 +54,14 @@ const {width = 'initial', height = '100svh'} = Astro.props;
         height: 100vh;
         overflow-y: auto;
         overflow-x: hidden;
+        scroll-behavior: smooth;
+
+        backdrop-filter: blur(6px) saturate(220%);
+
+		background: linear-gradient(45deg, #000000ac 40%, #00000039 100%);
+
+        @media (max-width: 767.98px) {
+            background: #000000ac;
+        }
     }
 </style>

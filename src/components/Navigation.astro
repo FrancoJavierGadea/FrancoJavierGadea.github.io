@@ -13,15 +13,21 @@
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Inicio</a>
+                    <a class="nav-link" href="/">
+                        <i class="bi bi-house-door-fill"></i> Inicio
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Experiencia</a>
+                    <a class="nav-link" href="/#Experiencia">
+                        <i class="bi bi-journal-text"></i> Experiencia
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/proyectos">Proyectos</a>
+                    <a class="nav-link" href="/#Proyectos">
+                        <i class="bi bi-pc-display"></i> Proyectos
+                    </a>
                 </li>
 
             </ul>
@@ -35,10 +41,16 @@
         padding: 20px 0;
     }
     nav .navbar-nav {
-        gap: 20px 50px;
+        gap: 20px 100px;
     }
     nav .navbar-nav .nav-link {
-        font-size: 20px;
-        --bs-nav-link-color: #fff;
+        font-size: 22px;
+        font-weight: 600;
+        --bs-nav-link-color: #ffffff;
+        transition: scale 0.5s;
+    }
+    nav .navbar-nav .nav-link:hover {
+        color: #f3b61f;
+        scale: 1.03;
     }
 </style>

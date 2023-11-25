@@ -1,7 +1,7 @@
 ---
-import PerfilPhoto from "../assets/perfil.webp";
+import PerfilPhoto from "@Data/perfil.webp";
 import Redes from "./Redes.astro";
-import * as perfil from "../assets/perfil.md";
+import * as perfil from "@Data/perfil.md";
 
 
 ---
@@ -32,7 +32,7 @@ import * as perfil from "../assets/perfil.md";
 <style>
     .Perfil {
         margin: 0;
-        padding-top: 0px;
+        padding-top: 20px;
 
         width: fit-content;
     }
@@ -41,6 +41,10 @@ import * as perfil from "../assets/perfil.md";
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        @media (max-width: 767.98px) {
+            align-items: center;
+        }
     }
     .Perfil-data {
         display: flex;
@@ -48,12 +52,15 @@ import * as perfil from "../assets/perfil.md";
         align-items: center;
         gap: 20px;
         width: 80%;
+
+        @media (max-width: 575.98px) {
+            width: 100%;
+        }
     }
     .Perfil-image {
         max-width: 200px;
         border-radius: 50%;
-        filter: brightness(130%) drop-shadow(7px 7px 5px rgba(0,0,0,0.6));
-/*         backdrop-filter: blur(16px) saturate(120%); */
+        filter: brightness(130%) drop-shadow(7px 7px 5px rgba(0,0,0,0.6)) saturate(120%);
     }
 
     .Perfil-name {
@@ -68,7 +75,9 @@ import * as perfil from "../assets/perfil.md";
     }
     .Perfil-description :global(p) {
         text-wrap: balance;
-        width: 90ch;
+        max-width: 90ch;
+        font-size: 18px;
+        line-height: 30px;
     }
     .Perfil-description :global(p strong) {
         color: #f3b61f;

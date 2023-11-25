@@ -1,5 +1,5 @@
 ---
-import notPreview from "../assets/no-preview.jpg";
+import notPreview from "@Data/Projects/no-preview.jpg";
 
 const {
     title = 'Libros - Midudev',
@@ -55,14 +55,11 @@ const {
 
         constructor(){
             super();
-            console.log('custom card');
 
             const image = this.querySelector('.Card-image');
             const video = this.querySelector('.Card-video') as HTMLVideoElement;
 
             if(video){
-
-                console.log('add listeners')
 
                 this.addEventListener('mouseenter', () => {
     
@@ -121,6 +118,7 @@ const {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr;
+        margin-bottom: 10px;
     }
     .Card-preview > * {
         grid-column-start: 1;
@@ -160,6 +158,7 @@ const {
 
     .Card-description {
         padding: 0 10px;
+        font-size: 16px;
 
         word-wrap: break-word;
         overflow: hidden;

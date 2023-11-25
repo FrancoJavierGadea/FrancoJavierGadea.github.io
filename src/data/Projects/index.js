@@ -31,6 +31,8 @@ export async function getProjects(){
         const name = getFileName(path);
         const ext = getFileExtension(path);
 
+        if(folder === '.') return acc;
+
         if(!acc[folder]){
 
             acc[folder] = {
@@ -68,7 +70,6 @@ export async function getProjects(){
         return acc;
 
     }, Promise.resolve({}));
-
 
     return PROJECTS;
 }

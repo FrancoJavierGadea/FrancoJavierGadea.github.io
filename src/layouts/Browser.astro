@@ -1,7 +1,6 @@
 ---
 const { title, url, video, github, next, previous, favicon } = Astro.props;
 
-console.log(favicon);
 
 ---
 
@@ -184,5 +183,11 @@ console.log(favicon);
         width: var(--browser-icon-size);
         height: var(--browser-icon-size);
         object-fit: scale-down;
+    }
+
+
+    .Browser-content {
+        background-color: #202124;
+        min-height: 200px;
     }
 </style>

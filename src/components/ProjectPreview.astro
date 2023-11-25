@@ -1,6 +1,7 @@
 ---
 import Browser from "@layouts/Browser.astro";
-const {video, favicon, title, url, github, next, previous} = Astro.props;
+
+const {video, image, favicon, title, url, github, next, previous} = Astro.props;
 ---
 
 <div class="Project-preview">
@@ -15,7 +16,7 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
     
         <div class="Preview-content">
 
-            <video class="Preview-video" src={video} muted loop autoplay></video>
+            <video class="Preview-video" src={video} poster={image} muted loop autoplay></video>
 
             <button type="button" class="Preview-btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="bi bi-arrows-angle-expand"></i>
@@ -89,10 +90,7 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
                 document.querySelector('.Background-content').style.overflowY = 'hidden';
 
                 //! Fix position fixed issue when scrolling
-                document.querySelector('.Page-content').style.backdropFilter = 'none';
-
-
-                alert(window.matchMedia('(hover: none)').matches)
+                document.querySelector('.Background-content').style.backdropFilter = 'none';
 
                 //Mobile lock orientation
                 if(window.matchMedia('(hover: none)').matches){
@@ -108,7 +106,7 @@ const {video, favicon, title, url, github, next, previous} = Astro.props;
                 document.querySelector('.Background-content').style.overflowY = '';
                 
                 //! Fix position fixed issue when scrolling
-                document.querySelector('.Page-content').style.backdropFilter = '';
+                document.querySelector('.Background-content').style.backdropFilter = '';
 
                 //Mobile unlock orientation
                 if(window.matchMedia('(hover: none)').matches){

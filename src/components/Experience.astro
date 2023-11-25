@@ -14,7 +14,7 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
 
 ---
 
-<section class="Experience">
+<section class="Experience" id="Experiencia">
 
     <h2 class="Experience-title">Experiencia</h2>
 
@@ -29,23 +29,20 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
 
                 return <div class="Experience-item">
 
-                    {
-                        /* logo && <img class="logo" src={logo.src} alt="" /> */
-                    }
-
                     <div class="Experience-item-info">
-
-                        <a href={markdown.frontmatter.url} target="_blank" rel="noopener noreferrer">
-                            
-                            <h4 class="title">{markdown.frontmatter.title}</h4>
-                        </a>
-    
+   
+                        <h4 class="title">{markdown.frontmatter.title}</h4>
+                    
                         <p class="date">{dateString}</p>
+
+                        <p class="description">{markdown.frontmatter.description}</p>
+    
                     </div>
   
                 </div>
             })
         }
+
     </div>
 
 </section>
@@ -64,15 +61,19 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
 
     .Experience-content {
         padding: 50px;
-        padding-top: 0;
         display: flex;
         gap: 0;
         flex-direction: column;
+
+        @media (max-width: 575.98px) {
+            padding: 50px 15px;
+        }
     }
 
     .Experience-item {
-        padding: 20px;
+        padding-top: 0;
         padding-left: 40px;
+        padding-bottom: 50px;
         position: relative;
 
         --timeline-line-width: 2px;
@@ -82,57 +83,66 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
         display: flex;
         gap: 10px;
     }
+
+    /*Timeline line*/
     .Experience-item::before {
+        display: block;
+        content: "";
+
         position: absolute;
         left: 0;
-        top: 0;
-        content: "";
-        display: block;
+        top: 15px;
+        
         width: var(--timeline-line-width);
         height: 100%;
         background-color: var(--timeline-line-color);
     }
-    .Experience-item:first-child::before {
-        height: 50%;
-        bottom: 0;
-        top: initial;
-    }
     .Experience-item:last-child::before {
-        height: 50%;
-        top: 0;
-        bottom: initial;
+        content: none;
     }
 
+    /*Timeline icon*/
     .Experience-item::after {
+        display: block;
         content: "\f287";
         content: "\f1ff";
+        content: "\f208";
         font-size: 20px;
         font-family: 'bootstrap-icons';
+
         position: absolute;
         top: 0;
         left: -9px;
-        height: 100%;
-        display: flex;
-        align-items: center;
+
         color: var(--timeline-icon-color);
     }
 
     .Experience-item-info {
         position: relative;
-        top: 22px;
+
     }
     .Experience-item-info a {
         text-decoration: none;
     }
+
     .Experience-item-info .title {
+        font-size: 24px;
         color: #f3b61f;
+    }
+
+    .Experience-item-info .date {
+        font-size: 16px;
+        color: rgb(177, 177, 177);
     }
     .Experience-item-info .date::first-letter {
         text-transform: capitalize;
     }
 
-    .Experience-item .logo {
-        max-width: 100px;
-        object-fit: scale-down;
+
+    .Experience-item-info .description {
+        font-size: 16px;
+        max-width: 70ch;
+        text-wrap: balance;
     }
+
 </style>

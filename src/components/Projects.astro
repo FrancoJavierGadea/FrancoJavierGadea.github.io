@@ -11,7 +11,7 @@ const PROJECTS = await getProjects();
 ---
 
 
-<section class="Projects">
+<section class="Projects" id="Proyectos">
 
     <h2 class="Projects-title">Proyectos</h2>
 
@@ -53,8 +53,8 @@ const PROJECTS = await getProjects();
         padding: 50px;
 
         display: grid;
-        gap: 30px;
-        justify-content: center;
+        gap: 50px 30px;
+        justify-items: center;
         
         grid-template-columns: repeat(4, 1fr);
 
@@ -68,6 +68,7 @@ const PROJECTS = await getProjects();
 
         @media (max-width: 575.98px) {
             grid-template-columns: 1fr;
+            gap: 30px;
         }
     }
 </style>
