@@ -1,0 +1,98 @@
+---
+import { getTechnologies } from "@Data/Technologies/index.js";
+
+const TECHNOLOGIES = await getTechnologies();
+
+const TECH_ARRAY = Object.values(TECHNOLOGIES);
+---
+
+<section class="Technologies" id="Tecnologias">
+
+    <h2 class="Technologies-title">Tecnologías</h2>
+
+    <div class="Technologies-content">
+
+        <div class="items">
+            {
+                [...TECH_ARRAY, ...TECH_ARRAY].map((technologie) => {
+
+                    const {name} = technologie.content?.markdown?.frontmatter;
+
+                    return <div class="item" title={name}>
+
+                        <img src={technologie.content?.logo.src} alt={`Logo de ${name}`} />
+
+                        <h5>{name}</h5>
+                    </div>
+                })
+            }
+        </div>
+    </div>
+
+</section>    
+
+
+<style
+    define:vars={{
+        "items-width": "180px",
+        "items-length": TECH_ARRAY.length,
+        "items-duration": "2s"
+    }}
+>
+
+    .Technologies{
+        margin-top: 50px; 
+        margin-bottom: 150px;  
+    }
+
+    .Technologies-title {
+        padding-top: 20px;
+        padding-bottom: 15px;
+        font-size: 40px;
+        border-bottom: 2px solid #002fff;
+    }
+
+    .Technologies-content {
+        margin: 50px;
+        padding-top: 20px;
+        overflow: hidden;
+    }
+    .Technologies-content .items {
+        display: flex;
+
+        animation-name: move-to-left;
+        animation-duration: calc(var(--items-duration) * var(--items-length));
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+    .Technologies-content:hover .items {
+        /* animation-play-state: paused; */
+    }
+
+    .Technologies-content .item {
+
+        width: var(--items-width);
+        flex-shrink: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .Technologies-content .item img {
+        display: block;
+        width: 80px;
+        height: 80px;
+        object-fit: scale-down;
+    }
+
+    @keyframes move-to-left {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX( calc(-1 * var(--items-width) * var(--items-length)) );
+        }
+    }
+
+</style>
