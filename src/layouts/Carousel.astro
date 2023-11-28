@@ -1,0 +1,241 @@
+---
+const items_width = Astro.props['items-width'] || '180px';
+const duration = Astro.props['duration'] || '2s';
+
+const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
+---
+
+<custom-carousel data-direction={`to-${to}`} data-duration={duration} data-autoPlay={autoPlay}>
+
+    <div class="Carousel">
+
+        <div class="Carousel-controls">
+            <button class="btn btn-play">
+                <i class="bi bi-play-fill"></i>
+            </button>
+
+            <button class="btn btn-grid">
+                <i class="bi bi-grid"></i>
+            </button>
+        </div>
+
+        <div class="Carousel-content">
+
+            <div class="Carousel-content-items">
+
+                <div class="items">
+                    
+                    <slot />
+                </div>
+
+                <div class="items copy-items">
+                    
+                    <slot />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</custom-carousel>
+
+<script>
+    //@ts-nocheck
+
+    class CustomCarousel extends HTMLElement {
+
+        isRunning = false;
+
+        grid = false;
+
+        constructor(){
+            super();
+
+            this.direction = this.getAttribute('data-direction');
+            this.duration = this.getAttribute('data-duration');
+
+            this.content = this.querySelector('.Carousel-content');
+            this.items = this.querySelector('.Carousel-content-items');
+
+            //Number of items
+            this.length = this.items.querySelector('.items').children.length;
+
+            this.items.style.setProperty('--items-length', this.length);
+
+            
+            //controls
+            const playButton = this.querySelector('.Carousel-controls .btn-play');
+            
+            playButton.addEventListener('click', () => {
+                
+                if(this.isRunning){
+                    this.pause();
+                    
+                }
+                else {
+                    this.play();
+                    
+                }
+            });
+
+            const gridButton = this.querySelector('.Carousel-controls .btn-grid');
+
+            gridButton.addEventListener('click', () => {
+
+                this.grid = !this.grid;
+
+                if(this.grid){
+                    this.items.classList.add('grid');
+                    this.items.classList.toggle(this.direction, false);
+                    this.items.classList.toggle('pause', false);  
+
+                    gridButton.querySelector('i').classList.replace('bi-grid', 'bi-grid-fill');
+                }
+                else {
+                    this.items.classList.toggle('grid', false);
+                    
+                    if(this.autoPlay) this.play();
+                    
+                    gridButton.querySelector('i').classList.replace('bi-grid-fill', 'bi-grid');
+                }
+
+                playButton.disabled = this.grid;
+            });
+
+
+            //Auto play      
+            this.autoPlay = this.hasAttribute('data-autoPlay');
+
+            //if(this.autoPlay) this.play();
+        }
+
+        pause(){
+
+            this.items.classList.add('pause');
+
+            this.isRunning = false;
+
+            this.querySelector('.Carousel-controls .btn-play i').classList.replace('bi-pause-fill', 'bi-play-fill');
+        }
+        
+        play(){
+            
+            if(!this.items.classList.contains(this.direction)){
+
+                this.items.classList.add(this.direction);
+            }
+            else {
+
+                this.items.classList.toggle('pause', false);
+            }
+ 
+            this.isRunning = true;
+            
+            this.querySelector('.Carousel-controls .btn-play i').classList.replace('bi-play-fill', 'bi-pause-fill');
+        }
+    }
+
+    customElements.define('custom-carousel', CustomCarousel);
+</script>
+
+<style
+    define:vars={{
+        "items-width": items_width,
+        "duration": duration,
+        "gap": gap
+    }}
+>
+    .Carousel-controls {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+        padding: 20px 0;
+    }
+    .Carousel-controls .btn {
+        border: none;
+        font-size: 18px;
+    }
+
+    .Carousel-content {
+        overflow: hidden;
+    }
+
+    .Carousel-content-items {
+        display: flex;
+        gap: var(--gap);
+
+        --items-full-width: calc(
+            var(--items-width) * var(--items-length) 
+            +
+            var(--gap) * var(--items-length)
+        );
+    }
+    .Carousel-content-items .items {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        gap: var(--gap);
+    }
+    .Carousel-content-items .items > :global(*) {
+        width: var(--items-width);
+        flex-shrink: 0;
+    }
+
+    /* Animaciones */
+    .pause {
+        animation-play-state: paused;
+    }
+
+    .to-left {
+        display: flex;
+        justify-content: flex-start;
+
+        animation-name: move-to-left;
+        animation-duration: calc(var(--duration) * var(--items-length));
+        animation-timing-function: linear;
+        animation-iteration-count: infinite; 
+    }
+
+    @keyframes move-to-left {
+        from {
+            transform: translateX(0);
+        }
+        to {
+
+            transform: translateX( calc(-1 * var(--items-full-width)) );
+        }
+    }
+
+    .to-right {
+        display: flex;
+        justify-content: flex-end;
+
+        animation-name: move-to-right;
+        animation-duration: calc(var(--duration) * var(--items-length));
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes move-to-right {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX( var(--items-full-width) );
+        }
+    }
+
+    /* Grid */
+    .grid .items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, var(--items-width));
+        width: 100%;
+        justify-content: space-between;
+        gap: 50px 20px;
+    }
+    .grid .copy-items {
+        display: none;
+    }
+</style>

@@ -1,5 +1,6 @@
 ---
 import { getTechnologies } from "@Data/Technologies/index.js";
+import Carousel from "@layouts/Carousel.astro";
 
 const TECHNOLOGIES = await getTechnologies();
 
@@ -12,13 +13,13 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
 
     <div class="Technologies-content">
 
-        <div class="items">
+        <Carousel autoPlay>
             {
-                [...TECH_ARRAY, ...TECH_ARRAY].map((technologie) => {
+                TECH_ARRAY.map((technologie) => {
 
                     const {name} = technologie.content?.markdown?.frontmatter;
 
-                    return <div class="item" title={name}>
+                    return <div class="tech-item" title={name}>
 
                         <img src={technologie.content?.logo.src} alt={`Logo de ${name}`} />
 
@@ -26,21 +27,15 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
                     </div>
                 })
             }
-        </div>
+        </Carousel>
     </div>
 
 </section>    
 
 
-<style
-    define:vars={{
-        "items-width": "180px",
-        "items-length": TECH_ARRAY.length,
-        "items-duration": "2s"
-    }}
->
+<style>
 
-    .Technologies{
+    .Technologies {
         margin-top: 50px; 
         margin-bottom: 150px;  
     }
@@ -53,46 +48,25 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
     }
 
     .Technologies-content {
-        margin: 50px;
-        padding-top: 20px;
-        overflow: hidden;
-    }
-    .Technologies-content .items {
-        display: flex;
 
-        animation-name: move-to-left;
-        animation-duration: calc(var(--items-duration) * var(--items-length));
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-    }
-    .Technologies-content:hover .items {
-        /* animation-play-state: paused; */
+        padding: 0 50px;
     }
 
-    .Technologies-content .item {
 
-        width: var(--items-width);
-        flex-shrink: 0;
+    .Technologies-content .tech-item {
 
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
     }
-    .Technologies-content .item img {
+    .Technologies-content .tech-item img {
         display: block;
         width: 80px;
         height: 80px;
         object-fit: scale-down;
     }
 
-    @keyframes move-to-left {
-        from {
-            transform: translateX(0);
-        }
-        to {
-            transform: translateX( calc(-1 * var(--items-width) * var(--items-length)) );
-        }
-    }
+    
 
 </style>

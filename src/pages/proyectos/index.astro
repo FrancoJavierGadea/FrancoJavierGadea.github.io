@@ -1,6 +1,7 @@
 ---
 import RootLayout from "@layouts/RootLayout.astro";
 import Projects from "@components/Projects.astro";
+import Carousel from "@layouts/Carousel.astro";
 
 ---
 
@@ -9,7 +10,10 @@ import Projects from "@components/Projects.astro";
     <div class="container">
 
         <Projects />
-    </div>
 
+        
+        <Carousel to="left"/>
+    </div>
+    
 </RootLayout>
 
