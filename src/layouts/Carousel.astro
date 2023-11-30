@@ -5,7 +5,17 @@ const duration = Astro.props['duration'] || '2s';
 const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
 ---
 
-<custom-carousel data-direction={`to-${to}`} data-duration={duration} data-autoPlay={autoPlay}>
+<custom-carousel 
+    data-direction={`to-${to}`} 
+
+    data-duration={duration} 
+    
+    data-autoPlay={autoPlay} 
+
+    data-items-width={items_width} 
+
+    data-items-gap={gap}
+>
 
     <div class="Carousel">
 
@@ -61,14 +71,21 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
 
             //Number of items
             this.length = this.items.querySelector('.items').children.length;
-
+            
+            //Setting css variables
             this.items.style.setProperty('--items-length', this.length);
+            this.items.style.setProperty('--items-animation-name', this.direction);
 
+            this.items.style.setProperty('--items-justify', this.direction === 'to-left' ? 'start' : 'end');
+
+            //Size and gap of items
+            this.itemsGap = +this.getAttribute('data-items-gap').replaceAll(/[^0-9]/g, '');
+            this.itemsWidth = +this.getAttribute('data-items-width').replaceAll(/[^0-9]/g, '');
             
             //controls
-            const playButton = this.querySelector('.Carousel-controls .btn-play');
+            this.playButton = this.querySelector('.Carousel-controls .btn-play');
             
-            playButton.addEventListener('click', () => {
+            this.playButton.addEventListener('click', () => {
                 
                 if(this.isRunning){
                     this.pause();
@@ -80,9 +97,9 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
                 }
             });
 
-            const gridButton = this.querySelector('.Carousel-controls .btn-grid');
+            this.gridButton = this.querySelector('.Carousel-controls .btn-grid');
 
-            gridButton.addEventListener('click', () => {
+            this.gridButton.addEventListener('click', () => {
 
                 this.grid = !this.grid;
 
@@ -91,33 +108,59 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
                     this.items.classList.toggle(this.direction, false);
                     this.items.classList.toggle('pause', false);  
 
-                    gridButton.querySelector('i').classList.replace('bi-grid', 'bi-grid-fill');
+                    this.gridButton.querySelector('i').classList.replace('bi-grid', 'bi-grid-fill');
                 }
                 else {
                     this.items.classList.toggle('grid', false);
                     
                     if(this.autoPlay) this.play();
                     
-                    gridButton.querySelector('i').classList.replace('bi-grid-fill', 'bi-grid');
+                    this.gridButton.querySelector('i').classList.replace('bi-grid-fill', 'bi-grid');
                 }
 
-                playButton.disabled = this.grid;
+                this.playButton.disabled = this.grid;
             });
 
 
             //Auto play      
             this.autoPlay = this.hasAttribute('data-autoPlay');
 
-            //if(this.autoPlay) this.play();
+            if(this.autoPlay) this.play();
         }
 
         pause(){
 
+            const pause = (() => {
+
+                const width = this.itemsWidth + this.itemsGap;
+
+                const max_width = width * this.length;
+
+                //Current transform
+                const matrix = window.getComputedStyle(this.items).transform;
+
+                const [scaleX, skewX, skewY, scaleY, translateX, translateY] = matrix.replaceAll(/[^0-9\.\- ]/g, '').split(' ').map(v => +v);
+                
+                //Calculate 
+                const diff = Math.abs(translateX % width);
+
+                const to = Math.sign(translateX) * (Math.abs(translateX) + (width - diff));
+
+                return {
+                    from: translateX,
+
+                    to: Math.abs(width) >= max_width ? 0 : to,
+                };
+            })();
+
+            this.items.style.setProperty('--pause-from', `${pause.from}px`);
+            this.items.style.setProperty('--pause-to', `${pause.to}px`);
+            
             this.items.classList.add('pause');
 
             this.isRunning = false;
 
-            this.querySelector('.Carousel-controls .btn-play i').classList.replace('bi-pause-fill', 'bi-play-fill');
+            this.playButton.querySelector('i').classList.replace('bi-pause-fill', 'bi-play-fill');
         }
         
         play(){
@@ -131,9 +174,12 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
                 this.items.classList.toggle('pause', false);
             }
  
+            this.items.style.setProperty('--pause-from', '');
+            this.items.style.setProperty('--pause-to', '');
+
             this.isRunning = true;
             
-            this.querySelector('.Carousel-controls .btn-play i').classList.replace('bi-play-fill', 'bi-pause-fill');
+            this.playButton.querySelector('i').classList.replace('bi-play-fill', 'bi-pause-fill');
         }
     }
 
@@ -164,13 +210,20 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
 
     .Carousel-content-items {
         display: flex;
+        justify-content: var(--items-justify);
         gap: var(--gap);
 
-        --items-full-width: calc(
-            var(--items-width) * var(--items-length) 
-            +
-            var(--gap) * var(--items-length)
+        --items-full-width: calc( 
+            (var(--items-width) + var(--gap)) * var(--items-length)
         );
+
+        animation-name: var(--items-animation-name), fadein;
+        animation-duration: calc(var(--duration) * var(--items-length)), 1.7s;
+        animation-delay: 0s, 0s;
+        animation-timing-function: linear, ease-in;
+        animation-iteration-count: infinite, 1;
+        animation-fill-mode: both, none;
+        animation-play-state: running, running;
     }
     .Carousel-content-items .items {
         display: flex;
@@ -184,50 +237,64 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
     }
 
     /* Animaciones */
-    .pause {
-        animation-play-state: paused;
-    }
-
-    .to-left {
-        display: flex;
-        justify-content: flex-start;
-
-        animation-name: move-to-left;
-        animation-duration: calc(var(--duration) * var(--items-length));
-        animation-timing-function: linear;
-        animation-iteration-count: infinite; 
-    }
-
-    @keyframes move-to-left {
+    @keyframes to-left {
         from {
-            transform: translateX(0);
+            transform: translateX(0px);
         }
         to {
-
             transform: translateX( calc(-1 * var(--items-full-width)) );
         }
     }
-
-    .to-right {
-        display: flex;
-        justify-content: flex-end;
-
-        animation-name: move-to-right;
-        animation-duration: calc(var(--duration) * var(--items-length));
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-    }
-
-    @keyframes move-to-right {
+    @keyframes to-right {
         from {
-            transform: translateX(0);
+            transform: translateX(0px);
         }
         to {
             transform: translateX( var(--items-full-width) );
         }
     }
 
+    .pause {
+        
+        animation-name: var(--items-animation-name), pause-animation;
+        animation-duration: calc(var(--duration) * var(--items-length)), 0.5s;
+        animation-delay: 0s, 0s;
+        animation-timing-function: linear, linear;
+        animation-iteration-count: infinite, 1;
+        animation-fill-mode: both, both;
+        animation-play-state: paused, running;
+    }
+    @keyframes pause-animation {
+        from {
+            transform: translateX(var(--pause-from, 0));
+        }
+        to {
+            transform: translateX(var(--pause-to, 0));
+        }
+    }
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes play-animation {
+        from {
+            transform: translateX(var(--pause-to, 0));
+        }
+        to {
+            transform: translateX(var(--pause-from, 0));
+        }
+    }
+
     /* Grid */
+    .grid {
+        animation: none;
+    }
     .grid .items {
         display: grid;
         grid-template-columns: repeat(auto-fill, var(--items-width));
