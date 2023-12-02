@@ -1,6 +1,6 @@
 ---
 import { getTechnologies } from "@Data/Technologies/index.js";
-import Carousel from "@layouts/Carousel.astro";
+import Carousel from "@layouts/Carousel/Carousel.astro";
 
 const TECHNOLOGIES = await getTechnologies();
 
@@ -21,9 +21,12 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
 
                     return <div class="tech-item" title={name}>
 
-                        <img src={technologie.content?.logo.src} alt={`Logo de ${name}`} />
-
-                        <h5>{name}</h5>
+                        <div class="tech-item-content">
+                            
+                            <img src={technologie.content?.logo.src} alt={`Logo de ${name}`} />
+    
+                            <h5>{name}</h5>
+                        </div>
                     </div>
                 })
             }
@@ -50,15 +53,27 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
     .Technologies-content {
 
         padding: 0 50px;
+
+        @media (max-width: 575.98px) {
+            padding: 0;
+        }
     }
 
 
     .Technologies-content .tech-item {
 
+    }
+    .Technologies-content .tech-item-content {  
         display: flex;
+        width: fit-content;
         flex-direction: column;
         align-items: center;
         gap: 10px;
+        margin: auto;
+
+        @media (max-width: 575.98px) {
+            margin: 0 30px;
+        }
     }
     .Technologies-content .tech-item img {
         display: block;

@@ -1,0 +1,180 @@
+---
+const items_width = Astro.props['items-width'] || '180px';
+const duration = Astro.props['duration'] || '2s';
+
+const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
+---
+
+<custom-carousel 
+    data-direction={`to-${to}`} 
+
+    data-duration={duration} 
+    
+    data-autoPlay={autoPlay} 
+
+    data-items-width={items_width} 
+
+    data-items-gap={gap}
+>
+
+    <div class="Carousel">
+
+        <div class="Carousel-controls">
+            <button class="btn btn-play">
+                <i class="bi bi-play-fill"></i>
+            </button>
+
+            <button class="btn btn-prev">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+
+            <button class="btn btn-next">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+
+            <button class="btn btn-grid">
+                <i class="bi bi-grid"></i>
+            </button>
+        </div>
+
+        <div class="Carousel-content">
+
+            <div class="Carousel-content-items">
+
+                <div class="items">
+                    
+                    <slot />
+                </div>
+
+                <div class="items copy-items">
+                    
+                    <slot />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</custom-carousel>
+
+<script src="./Carousel.js"></script>
+
+<style
+    define:vars={{
+        "items-width": items_width,
+        "duration": duration,
+        "gap": gap
+    }}
+>
+    .Carousel-controls {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 20px 0;
+
+        @media (max-width: 575.98px) {
+            justify-content: center;
+        }
+    }
+    .Carousel-controls .btn {
+        border: none;
+        font-size: 22px;
+    }
+    .Carousel-controls .btn:hover {
+        color: #f3b61f;
+    }
+    .Carousel-controls .btn i::before {
+        filter: drop-shadow(0px 0px 1px #000000);
+    }
+
+    .Carousel-content {
+        overflow: hidden;
+    }
+
+    .Carousel-content-items {
+        display: flex;
+        justify-content: var(--items-justify);
+        gap: var(--gap);
+
+        transform: translateX(var(--stop, 0));
+
+        transition: transform 1s;
+    }
+    .Carousel-content-items .items {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        gap: var(--gap);
+    }
+    .Carousel-content-items .items > :global(*) {
+        width: var(--items-width);
+        flex-shrink: 0;
+    }
+
+    /* Animaciones */
+    .Carousel-content-items.animation {
+        --items-full-width: calc( 
+            (var(--items-width) + var(--gap)) * var(--items-length)
+        );
+
+        animation-name: var(--items-animation-name), fadein;
+        animation-duration: calc(var(--duration) * var(--items-length)), 1s;
+        animation-delay: 0s, 0s;
+        animation-timing-function: linear, ease-in;
+        animation-iteration-count: infinite, 1;
+        animation-fill-mode: both, none;
+        animation-play-state: running, running;
+    }
+    .Carousel-content-items.pause {
+        
+        animation-play-state: paused;
+    }
+
+    @keyframes to-left {
+        from {
+            transform: translateX(0px);
+        }
+        to {
+            transform: translateX( calc(-1 * var(--items-full-width)) );
+        }
+    }
+    @keyframes to-right {
+        from {
+            transform: translateX(0px);
+        }
+        to {
+            transform: translateX( var(--items-full-width) );
+        }
+    }
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Grid */
+    .grid {
+        animation: none;
+        transform: none !important;
+        transition: none;
+    }
+    .grid .items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, var(--items-width));
+        width: 100%;
+        justify-content: space-between;
+        gap: 50px 20px;  
+
+        @media (max-width: 575.98px) {
+            grid-template-columns: repeat(2, var(--items-width));
+        }
+    }
+    .grid .copy-items {
+        display: none;
+    }
+</style>
