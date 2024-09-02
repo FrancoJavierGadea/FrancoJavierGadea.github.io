@@ -7,7 +7,6 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import Background from "../components/Background.astro";
 import { ViewTransitions, fade } from "astro:transitions";
-import Logros from "@components/React/Logros";
 
 
 const { title } = Astro.props;
@@ -31,7 +30,7 @@ const { title } = Astro.props;
 
 		<title>{title}</title>
 
-		<ViewTransitions />
+		<!-- <ViewTransitions /> -->
 	</head>
 	<body>
 
@@ -55,8 +54,6 @@ const { title } = Astro.props;
 			</div>
 
 		</Background>
-		
-		<Logros client:only transition:persist />
 
 		<script src={bootstrap}></script>
 
@@ -64,18 +61,7 @@ const { title } = Astro.props;
 </html>
 
 <script>
-	import { updateLogroRecurrente, updateLogroClickomano } from "@Data/Logros/Logros.js";
-import { detectDevtoolsOpen } from "src/utils/detectDevtools";
-
-	updateLogroClickomano();
-
-	updateLogroRecurrente();
-
-	detectDevtoolsOpen().then(() => {
-
-
-		alert('Dev tool are open');
-	});
+	
 
 </script>
 
