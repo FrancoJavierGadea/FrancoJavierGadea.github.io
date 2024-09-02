@@ -86,7 +86,11 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
         color: #f3b61f;
     }
     .Carousel-controls .btn i::before {
-        filter: drop-shadow(0px 0px 1px #000000);
+        filter: drop-shadow(0px 0px 1px #00000079);
+        transition: scale 0.5s;
+    }
+    .Carousel-controls .btn:hover i::before {
+        scale: 1.25;
     }
 
     .Carousel-content {

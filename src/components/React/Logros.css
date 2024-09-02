@@ -1,0 +1,29 @@
+.Logro-win[data-sonner-toast] {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background: #000000;
+    color: #ffffff;
+    gap: 20px;
+}
+
+.Logro-win[data-sonner-toast] [data-title] {
+    font-size: 25px;
+    color: #f3b61f;
+}
+.Logro-win[data-sonner-toast] [data-description] {
+    font-size: 16px;
+}
+
+.Logro-win[data-sonner-toast] [data-icon] {
+    width: 40px;
+    height: 40px;
+}
+.Logro-win[data-sonner-toast] [data-icon] .icon {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}

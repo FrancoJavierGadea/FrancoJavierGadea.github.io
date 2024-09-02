@@ -7,6 +7,7 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import Background from "../components/Background.astro";
 import { ViewTransitions, fade } from "astro:transitions";
+import Logros from "@components/React/Logros";
 
 
 const { title } = Astro.props;
@@ -20,6 +21,11 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Astro description">
 
+		<style is:inline data-media="Mi estilo css">
+			h1 {
+				color: red;
+			}
+		</style>
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -49,12 +55,29 @@ const { title } = Astro.props;
 			</div>
 
 		</Background>
-
+		
+		<Logros client:only transition:persist />
 
 		<script src={bootstrap}></script>
 
 	</body>
 </html>
+
+<script>
+	import { updateLogroRecurrente, updateLogroClickomano } from "@Data/Logros/Logros.js";
+import { detectDevtoolsOpen } from "src/utils/detectDevtools";
+
+	updateLogroClickomano();
+
+	updateLogroRecurrente();
+
+	detectDevtoolsOpen().then(() => {
+
+
+		alert('Dev tool are open');
+	});
+
+</script>
 
 
 <style is:global>
