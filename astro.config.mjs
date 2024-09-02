@@ -6,6 +6,9 @@ import rehypeExternalLinks from "rehype-external-links";
 // https://astro.build/config
 export default defineConfig({
 
+    site: "https://francojaviergadea.github.io/",
+    base: "/",
+
     integrations: [react()],
 
     output: "static",
