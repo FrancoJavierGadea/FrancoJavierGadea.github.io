@@ -20,19 +20,19 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
     <div class="Carousel">
 
         <div class="Carousel-controls">
-            <button class="btn btn-play">
+            <button class="btn btn-play" title="Pausa">
                 <i class="bi bi-play-fill"></i>
             </button>
 
-            <button class="btn btn-prev">
+            <button class="btn btn-prev" title="Anterior">
                 <i class="bi bi-arrow-left"></i>
             </button>
 
-            <button class="btn btn-next">
+            <button class="btn btn-next" title="Siguiente">
                 <i class="bi bi-arrow-right"></i>
             </button>
 
-            <button class="btn btn-grid">
+            <button class="btn btn-grid" title="Mostrar todos">
                 <i class="bi bi-grid"></i>
             </button>
         </div>
@@ -83,14 +83,14 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
         font-size: 22px;
     }
     .Carousel-controls .btn:hover {
-        color: #f3b61f;
+        color: var(--text-emphasis);
     }
     .Carousel-controls .btn i::before {
         filter: drop-shadow(0px 0px 1px #00000079);
-        transition: scale 0.5s;
+        transition: scale 0.2s;
     }
     .Carousel-controls .btn:hover i::before {
-        scale: 1.25;
+        scale: 1.1;
     }
 
     .Carousel-content {

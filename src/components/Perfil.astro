@@ -64,14 +64,15 @@ import * as perfil from "@Data/perfil.md";
     }
 
     .Perfil-name {
-        color: #0453ff;
-        color: #f3b61f;
+        color: var(--title-color);
         text-align: center;
+        letter-spacing: 2px;
     }
 
     .Perfil-description {
         padding: 10px;
-        color: white;
+        color: var(--text-color);
+        letter-spacing: 1px;
     }
     .Perfil-description :global(p) {
         text-wrap: balance;
@@ -80,7 +81,7 @@ import * as perfil from "@Data/perfil.md";
         line-height: 30px;
     }
     .Perfil-description :global(p strong) {
-        color: #f3b61f;
+        color: var(--text-emphasis);
     }
     
 </style>

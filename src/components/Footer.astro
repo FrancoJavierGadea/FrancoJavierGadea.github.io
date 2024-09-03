@@ -14,7 +14,7 @@ import * as perfil from "@Data/perfil.md";
             Hecho con <i class="bi bi-suit-heart-fill" style={{color: '#f00'}}></i> por
 
             <strong>
-                <a href="https://www.linkedin.com/in/franco-javier-alvarez/" target="_blank" rel="noopener noreferrer" style="color:#F3B61F" class="astro-SZ7XMLTE">
+                <a href="https://www.linkedin.com/in/franco-javier-alvarez/" target="_blank" rel="noopener noreferrer">
                     {perfil.frontmatter.name}
                 </a>
             </strong>
@@ -27,6 +27,10 @@ import * as perfil from "@Data/perfil.md";
         padding-top: 150px;
         padding-bottom: 20px;
         margin-top: auto;
+
+        p {
+            letter-spacing: 2px;
+        }
     }
     footer section {
         margin: auto;
@@ -37,5 +41,9 @@ import * as perfil from "@Data/perfil.md";
 
     footer a {
         text-decoration: none;
+    }
+
+    footer p strong a {
+        color: var(--text-emphasis);
     }
 </style>

@@ -1,0 +1,53 @@
+
+
+[theme="light"] {
+    --bs-body-bg: #ffffff;
+    --text-color: #000000;
+    --text-emphasis: #003492;
+    --title-color: #000;
+
+    --timeline-line-color: #003492;
+    --timeline-icon-color: #003492;
+
+    --section-border-color: #003492;
+
+
+    --card-background: #d6d6d6;
+    --card-text-color: #000000;
+    --card-title-color: #000000;
+
+    color-scheme: light;
+}
+
+[theme="dark"] {
+    --bs-body-bg: #0d1117;
+    --text-color: #ffffff;
+    --text-emphasis: #f3b61f;
+
+    --title-color: #f3b61f;
+
+    --timeline-line-color: #ffffffab;
+    --timeline-icon-color: #ffffff;
+
+    --section-border-color: #003492;
+
+    --card-background: #00000095;
+    --card-text-color: #fff;
+    --card-title-color: #f3b61f;
+
+    color-scheme: dark;
+}
+
+[theme="blackhole"] {
+    --bs-body-bg: #0d1117;
+    --text-color: #ffffff;
+    --text-emphasis: #f3b61f;
+
+    --section-border-color: #003492;
+
+    --card-background: #00000095;
+    --card-text-color: #fff;
+    --card-title-color: #f3b61f;
+
+    color-scheme: dark;
+}

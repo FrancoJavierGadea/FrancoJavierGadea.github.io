@@ -1,100 +1,100 @@
-import "@assets/sonner-styles.css";
-import "./Logros.css";
+// import "@assets/sonner-styles.css";
+// import "./Logros.css";
 
-import { useEffect, useState, useRef } from 'react';
-import { Toaster, toast } from "sonner";
-import Talos2 from "@assets/Talos2-stars.mp3";
-import { completeLogro, listenWonLogros } from '@Data/Logros/Logros';
-import { listenUserFirstInteraction } from "src/utils/detectUserInteraction";
-
-
+// import { useEffect, useState, useRef } from 'react';
+// import { Toaster, toast } from "sonner";
+// import Talos2 from "@assets/Talos2-stars.mp3";
+// import { completeLogro, listenWonLogros } from '@Data/Logros/Logros';
+// import { listenUserFirstInteraction } from "src/utils/detectUserInteraction";
 
 
-function Logros() {
 
-    const audioRef = useRef();
 
-    const [isInteracting, setIsInteracting] = useState(false);
+// function Logros() {
 
-    useEffect(() => {
+//     const audioRef = useRef();
+
+//     const [isInteracting, setIsInteracting] = useState(false);
+
+//     useEffect(() => {
         
-        const clearListeners = listenUserFirstInteraction(({isInteracting}) => {
+//         const clearListeners = listenUserFirstInteraction(({isInteracting}) => {
 
-            setIsInteracting(isInteracting);
-        });
+//             setIsInteracting(isInteracting);
+//         });
 
-        return () => {
+//         return () => {
 
-            clearListeners();
-        }
+//             clearListeners();
+//         }
 
-    }, []);
+//     }, []);
 
-    const [wonLogros, setWonLogros] = useState([]);
+//     const [wonLogros, setWonLogros] = useState([]);
 
-    useEffect(() => {
+//     useEffect(() => {
         
-        listenWonLogros((logro) => {
+//         listenWonLogros((logro) => {
 
-            console.log('Logro cumplido: ', logro);
+//             console.log('Logro cumplido: ', logro);
 
-            setWonLogros(old => [...old, logro]);
-        });
+//             setWonLogros(old => [...old, logro]);
+//         });
 
-    }, []);
+//     }, []);
 
 
-    useEffect(() => {
+//     useEffect(() => {
  
-        if(!isInteracting) return;
+//         if(!isInteracting) return;
 
-        console.log('Logros conseguidos', wonLogros.length);
+//         console.log('Logros conseguidos', wonLogros.length);
         
-        if(wonLogros.length > 0){
+//         if(wonLogros.length > 0){
 
-            audioRef.current.play();
+//             audioRef.current.play();
 
-            wonLogros.forEach((value, i) => {
+//             wonLogros.forEach((value, i) => {
     
-                const {name, logro} = value;
+//                 const {name, logro} = value;
     
-                setTimeout(() => {
+//                 setTimeout(() => {
 
-                    toast(logro.title, {
+//                     toast(logro.title, {
 
-                        description: logro.text,
+//                         description: logro.text,
 
-                        duration: 555000,
+//                         duration: 555000,
 
-                        icon: <img className="icon" src={logro.icon} />,
-                    });
+//                         icon: <img className="icon" src={logro.icon} />,
+//                     });
 
-                    //complete
-                    completeLogro(name);
+//                     //complete
+//                     completeLogro(name);
     
-                }, 3000 * i + 500);
-            });
+//                 }, 3000 * i + 500);
+//             });
 
-            setWonLogros([]);
-        }
+//             setWonLogros([]);
+//         }
         
-    }, [wonLogros, isInteracting]);
+//     }, [wonLogros, isInteracting]);
 
-    return (<div>
+//     return (<div>
 
-        <audio src={Talos2} style={{display: 'none'}} ref={audioRef}></audio>
+//         <audio src={Talos2} style={{display: 'none'}} ref={audioRef}></audio>
 
-        <Toaster offset="20px" position="bottom-right"
+//         <Toaster offset="20px" position="bottom-right"
         
-            toastOptions={{
-                unstyled: true,
-                className: 'Logro-win',
-            }}
-        />
+//             toastOptions={{
+//                 unstyled: true,
+//                 className: 'Logro-win',
+//             }}
+//         />
 
-    </div>);
-}
+//     </div>);
+// }
 
-export default Logros;
+// export default Logros;
 
 

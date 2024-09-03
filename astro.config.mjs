@@ -9,6 +9,10 @@ export default defineConfig({
     site: "https://francojaviergadea.github.io/",
     base: "/",
 
+    devToolbar: {
+        enabled: false
+    },
+
     integrations: [react()],
 
     output: "static",

@@ -56,7 +56,8 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
         padding-top: 20px;
         padding-bottom: 15px;
         font-size: 40px;
-        border-bottom: 2px solid #002fff;
+        border-bottom: 2px solid var(--section-border-color);
+        letter-spacing: 2px;
     }
 
     .Experience-content {
@@ -77,8 +78,6 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
         position: relative;
 
         --timeline-line-width: 2px;
-        --timeline-line-color: #002fff79;
-        --timeline-icon-color: #ffffff;
 
         display: flex;
         gap: 10px;
@@ -127,7 +126,7 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
 
     .Experience-item-info .title {
         font-size: 24px;
-        color: #f3b61f;
+        color: var(--title-color);
     }
 
     .Experience-item-info .date {

@@ -1,4 +1,8 @@
+---
+import ThemesSwitch from "./ThemesSwitch.astro";
 
+
+---
 
 <nav class="navbar navbar-expand-lg">
 
@@ -10,7 +14,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav mx-auto">
 
                 <li class="nav-item">
                     <a class="nav-link" href="/">
@@ -37,6 +41,8 @@
                 </li>
 
             </ul>
+
+            <ThemesSwitch />
         </div>
     </div>
 </nav>
@@ -45,18 +51,21 @@
 <style>
     nav {
         padding: 20px 0;
+        margin-bottom: 50px;
     }
     nav .navbar-nav {
-        gap: 20px 80px;
+        gap: 20px 50px;
     }
     nav .navbar-nav .nav-link {
         font-size: 22px;
         font-weight: 600;
-        --bs-nav-link-color: #ffffff;
-        transition: scale 0.5s;
+        --bs-nav-link-color: var(--text-color);
+        transition: scale 0.1s;
+        
+        letter-spacing: 1px;
     }
     nav .navbar-nav .nav-link:hover {
-        color: #f3b61f;
+        color: var(--text-emphasis);
         scale: 1.03;
     }
 </style>

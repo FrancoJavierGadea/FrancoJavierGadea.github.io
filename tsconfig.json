@@ -16,7 +16,8 @@
       "@assets/*": ["src/assets/*"],
       "@layouts/*": ["src/layouts/*"],
       "@Projects/*": ["src/data/Projects/*"],
-      "@Data/*": ["src/data/*"]
+      "@Data/*": ["src/data/*"],
+      "@Utils/*": ["src/utils/*"]
     }
   }
 }

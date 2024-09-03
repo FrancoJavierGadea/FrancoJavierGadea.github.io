@@ -107,10 +107,10 @@ const {
         backdrop-filter: blur(16px) saturate(180%);
         border: 1px solid rgb(159, 159, 159);
 
-        background-color: #00000095;
-        color: white;
+        background-color: var(--card-background);
+        color: var(--card-text-color);
 
-        transition: scale 0.3s ease;
+        transition: scale 0.2s ease;
     }
     .Card:hover {
         scale: 1.03;
@@ -151,7 +151,7 @@ const {
     }
 
     .Card-title {
-        color: #f3b61f;
+        color: var(--card-title-color);
         padding: 0 10px;
     }
     .Card-title::first-letter {

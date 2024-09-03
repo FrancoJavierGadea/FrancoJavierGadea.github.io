@@ -7,7 +7,7 @@ const {width = 'initial', height = '100svh'} = Astro.props;
 
 ---
 
-<div class="Background">
+<div class="Background Background-active">
 
     <video class="Background-video" src={Gargantua} autoplay muted loop
     
@@ -23,6 +23,35 @@ const {width = 'initial', height = '100svh'} = Astro.props;
 
     </div>
 </div>
+
+<script>
+    import ThemeChanging from "src/utils/Themes/ThemeChanging.js";
+
+    ThemeChanging.listen((theme) => {
+
+        console.log('New theme: ', theme);
+
+        const background = theme.background;
+
+        const $video = document.querySelector('.Background .Background-video');
+        const $background = document.querySelector('.Background');
+
+        if(background){
+
+            $video.src = background.video;
+            $video.style.backgroundImage =  `url(${background.poster})`;
+
+            $background.classList.toggle('Background-active', true);
+        }
+        else {
+            $video.src = '';
+            $video.style.backgroundImage = '';
+
+            $background.classList.toggle('Background-active', false);
+        }
+    });
+
+</script>
 
 
 <style>
@@ -46,6 +75,8 @@ const {width = 'initial', height = '100svh'} = Astro.props;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+
+        pointer-events: none;
     }
     .Background-content {
 
@@ -55,7 +86,9 @@ const {width = 'initial', height = '100svh'} = Astro.props;
         overflow-y: auto;
         overflow-x: hidden;
         scroll-behavior: smooth;
+    }
 
+    .Background-active .Background-content {
         backdrop-filter: blur(6px) saturate(220%);
 
 		background: linear-gradient(45deg, #00000089 40%, #00000029 100%);

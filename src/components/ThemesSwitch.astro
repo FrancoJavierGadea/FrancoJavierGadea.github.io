@@ -1,0 +1,50 @@
+---
+import { THEMES } from "src/utils/Themes/Themes";
+
+---
+
+<div class="Theme-switch">
+
+    <div class="dropdown-center">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Themes
+        </button>
+        <ul class="dropdown-menu">
+            {
+                Object.values(THEMES).map(({name}) => {
+
+                    return <li>
+                        <button class="dropdown-item" value={name}>{name}</button>
+                    </li>
+                })
+            }
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    import {changeTheme} from "../utils/Themes/ThemeChanging.js";
+
+    document.querySelectorAll('.Theme-switch ul li button')
+    .forEach(btn => {
+
+        btn.addEventListener('click', (e) => {
+
+            const btn = e.currentTarget;
+
+            const theme = btn.getAttribute('value');
+    
+            changeTheme(theme);
+        });
+    });
+</script>
+
+<style>
+.Theme-switch {
+
+    ul li button::first-letter {
+        text-transform: capitalize;
+    }
+}
+</style>

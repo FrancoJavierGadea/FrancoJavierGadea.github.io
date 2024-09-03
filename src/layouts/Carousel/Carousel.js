@@ -135,6 +135,8 @@ class CustomCarousel extends HTMLElement {
     
                     this.playButton.disabled = false;
 
+                    this.playButton.title = 'Play';
+
                     resolve({message: 'Paused'});
 
                     clearInterval(intervalID);
@@ -171,6 +173,7 @@ class CustomCarousel extends HTMLElement {
         this.isGrid = false;
         
         this.playButton.querySelector('i').classList.replace('bi-play-fill', 'bi-pause-fill');
+        this.playButton.title = 'Pausa';
     }
 
     async next(){
