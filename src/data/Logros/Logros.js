@@ -1,98 +1,98 @@
-import { persistentMap } from '@nanostores/persistent';
-import { RecurrenteLogro } from "./Recurrente.js"
-import { ClickomanoLogro } from './Clickomano.js';
-import { ExploradorLogro } from './Explorador.js';
+// import { persistentMap } from '@nanostores/persistent';
+// import { RecurrenteLogro } from "./Recurrente.js"
+// import { ClickomanoLogro } from './Clickomano.js';
+// import { ExploradorLogro } from './Explorador.js';
 
 
-const initialValue = {
+// const initialValue = {
 
-    [ExploradorLogro.name]: ExploradorLogro.logro,
+//     [ExploradorLogro.name]: ExploradorLogro.logro,
 
-    [ClickomanoLogro.name]: ClickomanoLogro.logro,
+//     [ClickomanoLogro.name]: ClickomanoLogro.logro,
 
-    [RecurrenteLogro.name]: RecurrenteLogro.logro
-}
+//     [RecurrenteLogro.name]: RecurrenteLogro.logro
+// }
 
-//STORE
-export const LogrosStore = persistentMap('logro:', initialValue, {
+// //STORE
+// export const LogrosStore = persistentMap('logro:', initialValue, {
 
-    encode: (value) => {
+//     encode: (value) => {
 
-        return JSON.stringify(value);
-    },
+//         return JSON.stringify(value);
+//     },
 
-    decode: (value) => {
-        try {
-            return JSON.parse(value);
-        }
-        catch(err) {
-            return value;
-        }
-    }
-});
+//     decode: (value) => {
+//         try {
+//             return JSON.parse(value);
+//         }
+//         catch(err) {
+//             return value;
+//         }
+//     }
+// });
 
-export function listenWonLogros(callback = () => {}){
+// export function listenWonLogros(callback = () => {}){
 
-    return LogrosStore.subscribe((store, key) => {
+//     return LogrosStore.subscribe((store, key) => {
 
-        Object.entries(store).forEach(([name, logro]) => {
+//         Object.entries(store).forEach(([name, logro]) => {
 
-            if(!logro.win && !logro.complete){
+//             if(!logro.win && !logro.complete){
 
-                callback({name, logro});
-            }
-        });
-    });
-}
+//                 callback({name, logro});
+//             }
+//         });
+//     });
+// }
 
-export function updateLogro(name, updateFn = () => {}){
+// export function updateLogro(name, updateFn = () => {}){
 
-    let logro = LogrosStore.get()[name];
+//     let logro = LogrosStore.get()[name];
 
-    if(logro.complete) return;
+//     if(logro.complete) return;
 
-    //Actualizar logro
-    logro = updateFn(logro);
+//     //Actualizar logro
+//     logro = updateFn(logro);
 
-    //Comprobar si se ha cumplido
-    logro.win = Object.values(logro.conditions).every(condition => condition);
+//     //Comprobar si se ha cumplido
+//     logro.win = Object.values(logro.conditions).every(condition => condition);
     
-    LogrosStore.setKey(name, {...logro});
-}
+//     LogrosStore.setKey(name, {...logro});
+// }
 
-export function completeLogro(name){
+// export function completeLogro(name){
 
-    const logro = LogrosStore.get()[name];
+//     const logro = LogrosStore.get()[name];
 
-    logro.complete = true;
+//     logro.complete = true;
 
-    LogrosStore.setKey(name, {...logro});
-}
+//     LogrosStore.setKey(name, {...logro});
+// }
 
-export function resetLogros(){
+// export function resetLogros(){
 
-    LogrosStore.set(initialValue);
-}
+//     LogrosStore.set(initialValue);
+// }
 
-window.resetLogros = resetLogros;
+// window.resetLogros = resetLogros;
 
-//------------------------------------------------
-export function updateLogroClickomano(){
+// //------------------------------------------------
+// export function updateLogroClickomano(){
     
-    const listener = () => {
+//     const listener = () => {
 
-		updateLogro(ClickomanoLogro.name, ClickomanoLogro.update);
-	};
+// 		updateLogro(ClickomanoLogro.name, ClickomanoLogro.update);
+// 	};
 
-    document.addEventListener('click', listener);
-}
+//     document.addEventListener('click', listener);
+// }
 
-export function updateLogroRecurrente(){
+// export function updateLogroRecurrente(){
 
-    updateLogro(RecurrenteLogro.name, RecurrenteLogro.update);
-}
+//     updateLogro(RecurrenteLogro.name, RecurrenteLogro.update);
+// }
 
-export function updateLogroExplorador(projectTitle){
+// export function updateLogroExplorador(projectTitle){
 
-    updateLogro(ExploradorLogro.name, ExploradorLogro.update(projectTitle));
-}
+//     updateLogro(ExploradorLogro.name, ExploradorLogro.update(projectTitle));
+// }
