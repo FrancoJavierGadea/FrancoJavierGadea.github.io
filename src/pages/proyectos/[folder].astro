@@ -2,7 +2,6 @@
 import ProjectPreview from '@components/ProjectPreview.astro';
 import RootLayout from '../../layouts/RootLayout.astro';
 import {getProjects} from "@Projects/index.js";
-import Logros from "@components/React/Logros.jsx";
 
 export async function getStaticPaths() {
     
@@ -106,8 +105,6 @@ const logro = {
 </RootLayout>
 
 <script>
-    import { updateLogroExplorador } from "@Data/Logros/Logros.js";
-
     class Project extends HTMLElement {
         constructor(){
             super();
@@ -115,13 +112,10 @@ const logro = {
             const projectTitle = this.getAttribute('data-project-title');
 
             console.log('Logros', projectTitle);
-
-            updateLogroExplorador(projectTitle);
         }
     }
 
     customElements.define('custom-project', Project);
-
 </script>
 
 <style>
