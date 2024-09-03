@@ -1,10 +1,7 @@
 ---
-import { getTechnologies } from "@Data/Technologies/index.js";
+import {TECHNOLOGIES} from "@Data/Technologies/technologies.js";
 import Carousel from "@layouts/Carousel/Carousel.astro";
 
-const TECHNOLOGIES = await getTechnologies();
-
-const TECH_ARRAY = Object.values(TECHNOLOGIES);
 ---
 
 <section class="Technologies" id="Tecnologias">
@@ -15,15 +12,18 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
 
         <Carousel autoPlay>
             {
-                TECH_ARRAY.map((technologie) => {
+                TECHNOLOGIES.map((tech) => {
 
-                    const {name} = technologie.content?.markdown?.frontmatter;
+                    const {name, logo} = tech;
 
                     return <div class="tech-item" title={name}>
 
                         <div class="tech-item-content">
                             
-                            <img src={technologie.content?.logo.src} alt={`Logo de ${name}`} />
+                            <custom-image data-light-src={logo.light} data-dark-src={logo.dark} >
+
+                                <img src={logo.dark} alt={`Logo de ${name}`} />
+                            </custom-image>
     
                             <h5>{name}</h5>
                         </div>
@@ -33,7 +33,43 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
         </Carousel>
     </div>
 
-</section>    
+</section>
+
+<script>
+import ThemeChanging from "@Utils/Themes/ThemeChanging";
+import { THEMES } from "@Utils/Themes/Themes";
+
+
+    class CustomImage extends HTMLElement {
+
+        constructor(){
+            super();
+
+            this.dark = this.getAttribute('data-dark-src');
+            this.light = this.getAttribute('data-light-src');
+
+            this.$image = this.querySelector('img');
+            
+            if(this.light) {
+
+                ThemeChanging.listen((theme) => {
+
+                    if(theme.bs === THEMES.DARK.bs){
+
+                        this.$image.src = this.dark;
+                    }
+
+                    if(theme.bs === THEMES.LIGHT.bs){
+
+                        this.$image.src = this.light;
+                    }
+                });
+            }
+        }
+    };
+
+    customElements.define('custom-image', CustomImage);
+</script>
 
 
 <style>
@@ -46,7 +82,7 @@ const TECH_ARRAY = Object.values(TECHNOLOGIES);
     .Technologies-title {
         padding-top: 20px;
         padding-bottom: 15px;
-        font-size: 40px;
+        font-size: clamp(30px, 5vw, 40px);
         border-bottom: 2px solid var(--section-border-color);
         letter-spacing: 2px;
     }

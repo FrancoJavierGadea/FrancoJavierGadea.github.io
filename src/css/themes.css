@@ -4,6 +4,7 @@
     --bs-body-bg: #ffffff;
     --text-color: #000000;
     --text-emphasis: #003492;
+    --text-subtitle: #8a8a8a;
     --title-color: #000;
 
     --timeline-line-color: #003492;
@@ -11,10 +12,18 @@
 
     --section-border-color: #003492;
 
+    --navigation-navbar-color: #eaeaea;
 
-    --card-background: #d6d6d6;
+    --card-background: #faf6f4;
     --card-text-color: #000000;
     --card-title-color: #000000;
+
+    --curriculum-icon-color: #fa0f00;
+    --whatsapp-icon-color: #1daa61;
+    --linkedin-icon-color: #0a66c2;
+    --mail-icon-color: #505050;
+    --github-icon-color: #000000;
+
 
     color-scheme: light;
 }
@@ -22,6 +31,7 @@
 [theme="dark"] {
     --bs-body-bg: #0d1117;
     --text-color: #ffffff;
+    --text-subtitle: #777777;
     --text-emphasis: #f3b61f;
 
     --title-color: #f3b61f;
@@ -31,9 +41,17 @@
 
     --section-border-color: #003492;
 
+    --navigation-navbar-color: #090b0f75;
+
     --card-background: #00000095;
     --card-text-color: #fff;
     --card-title-color: #f3b61f;
+
+    --curriculum-icon-color: #fa0f00;
+    --whatsapp-icon-color: #25d366;
+    --linkedin-icon-color: #0a66c2;
+    --mail-icon-color: #a7a7a7;
+    --github-icon-color: #fff;
 
     color-scheme: dark;
 }
@@ -41,13 +59,22 @@
 [theme="blackhole"] {
     --bs-body-bg: #0d1117;
     --text-color: #ffffff;
+    --text-subtitle: #777777;
     --text-emphasis: #f3b61f;
 
     --section-border-color: #003492;
 
+    --navigation-navbar-color: transparent;
+
     --card-background: #00000095;
     --card-text-color: #fff;
     --card-title-color: #f3b61f;
+
+    --curriculum-icon-color: #fa0f00;
+    --whatsapp-icon-color: #25d366;
+    --linkedin-icon-color: #0a66c2;
+    --mail-icon-color: #a7a7a7;
+    --github-icon-color: #fff;
 
     color-scheme: dark;
 }

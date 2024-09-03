@@ -55,7 +55,7 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
     .Experience-title {
         padding-top: 20px;
         padding-bottom: 15px;
-        font-size: 40px;
+        font-size: clamp(30px, 5vw, 40px);
         border-bottom: 2px solid var(--section-border-color);
         letter-spacing: 2px;
     }
@@ -127,11 +127,12 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
     .Experience-item-info .title {
         font-size: 24px;
         color: var(--title-color);
+        letter-spacing: 1px;
     }
 
     .Experience-item-info .date {
         font-size: 16px;
-        color: rgb(177, 177, 177);
+        color: var(--text-subtitle);
     }
     .Experience-item-info .date::first-letter {
         text-transform: capitalize;

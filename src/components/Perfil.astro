@@ -66,7 +66,8 @@ import * as perfil from "@Data/perfil.md";
     .Perfil-name {
         color: var(--title-color);
         text-align: center;
-        letter-spacing: 2px;
+        font-size: clamp(30px, 5vw, 47px);
+        letter-spacing: 4px;
     }
 
     .Perfil-description {
@@ -77,7 +78,7 @@ import * as perfil from "@Data/perfil.md";
     .Perfil-description :global(p) {
         text-wrap: balance;
         max-width: 90ch;
-        font-size: 18px;
+        font-size: clamp(14px, 3vw, 18px);
         line-height: 30px;
     }
     .Perfil-description :global(p strong) {
