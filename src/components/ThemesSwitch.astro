@@ -7,7 +7,7 @@ import { THEMES } from "src/utils/Themes/Themes";
 
     <div class="dropdown-center">
         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Themes
+          <b>Temas:</b> <span>Dark</span>
         </button>
         <ul class="dropdown-menu">
             {
@@ -36,6 +36,8 @@ import { THEMES } from "src/utils/Themes/Themes";
             const theme = btn.getAttribute('value');
     
             changeTheme(theme);
+
+            document.querySelector('.Theme-switch .dropdown-center button span').textContent = theme;
         });
     });
 </script>
@@ -43,8 +45,14 @@ import { THEMES } from "src/utils/Themes/Themes";
 <style>
 .Theme-switch {
 
-    ul li button::first-letter {
+    button {
+        letter-spacing: 1px;
+    }
+
+    ul li button::first-letter,
+    button span {
         text-transform: capitalize;
     }
+
 }
 </style>

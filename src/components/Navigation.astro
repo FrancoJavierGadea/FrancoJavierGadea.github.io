@@ -9,11 +9,11 @@ import ThemesSwitch from "./ThemesSwitch.astro";
     <div class="container">
         <a class="navbar-brand" href="#"></a>
 
-        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ms-auto order-2 order-lg-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse order-3 order-lg-1 pt-3 pt-lg-0" id="navbarNav">
             <ul class="navbar-nav mx-auto">
 
                 <li class="nav-item">
@@ -41,7 +41,9 @@ import ThemesSwitch from "./ThemesSwitch.astro";
                 </li>
 
             </ul>
+        </div>
 
+        <div class="order-1 order-lg-2">
             <ThemesSwitch />
         </div>
     </div>
