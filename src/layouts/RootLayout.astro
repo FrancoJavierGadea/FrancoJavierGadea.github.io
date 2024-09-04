@@ -10,7 +10,8 @@ import Footer from "../components/Footer.astro";
 import Background from "../components/Background.astro";
 import { ViewTransitions, fade } from "astro:transitions";
 import { THEMES } from "src/utils/Themes/Themes.js";
-
+import SEOTags from "@components/SEOTags.astro";
+import GoogleAnalytics from "@components/GoogleAnalytics.astro";
 
 const { title } = Astro.props;
 ---
@@ -21,15 +22,12 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Astro description">
 
-		<style is:inline data-media="Mi estilo css">
-			h1 {
-				color: red;
-			}
-		</style>
+		<SEOTags />
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<GoogleAnalytics />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon-2.svg" />
 
 		<title>{title}</title>
 
