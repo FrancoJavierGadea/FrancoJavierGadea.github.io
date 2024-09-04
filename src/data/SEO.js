@@ -10,7 +10,7 @@ export const SEO = {
     "url": "https://francojaviergadea.github.io/",
 
     "image": {
-        "url": "https://francojaviergadea.github.io/",
+        "url": "https://francojaviergadea.github.io/og-image-1.png",
         "width": "1200",
         "height": "600",
         "type": "image/png",
