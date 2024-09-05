@@ -1,15 +1,17 @@
 ---
-import Gargantua from "../assets/Gargantua.mp4";
-import GargantuaPoster from "../assets/Gargantua-poster.jpg";
+import Pattern from "../assets/background-2.svg?url";
+
 
 
 const {width = 'initial', height = '100svh'} = Astro.props;
 
 ---
 
-<div class="Background Background-active">
+<div class="Background">
 
     <video class="Background-video" src={''} autoplay muted loop
+
+        style={`background-image: url(${Pattern})`}
 
         transition:persist
 
@@ -34,19 +36,9 @@ const {width = 'initial', height = '100svh'} = Astro.props;
         const $video = document.querySelector('.Background .Background-video');
         const $background = document.querySelector('.Background');
 
-        if(background){
+        $video.src = background?.video || '';
 
-            $video.src = background.video;
-            $video.style.backgroundImage =  `url(${background.poster})`;
-
-            $background.classList.toggle('Background-active', true);
-        }
-        else {
-            $video.src = '';
-            $video.style.backgroundImage = '';
-
-            $background.classList.toggle('Background-active', false);
-        }
+        $video.style.backgroundImage = background?.poster ? `url(${background.poster})` : '';
     });
 
 </script>
@@ -84,15 +76,5 @@ const {width = 'initial', height = '100svh'} = Astro.props;
         overflow-y: auto;
         overflow-x: hidden;
         scroll-behavior: smooth;
-    }
-
-    .Background-active .Background-content {
-        backdrop-filter: blur(6px) saturate(220%);
-
-		background: linear-gradient(45deg, #00000089 40%, #00000029 100%);
-
-        @media (max-width: 767.98px) {
-            background: #000000b4;
-        }
     }
 </style>

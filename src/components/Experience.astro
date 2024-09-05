@@ -1,16 +1,7 @@
 ---
-import { getExperience } from "@Data/Experience/index.js";
+import { EXPERIENCE } from "@Data/Experience/Experience.js";
 
-const EXPERIENCE = await getExperience();
 
-const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
-
-    if(A.date < B.date) return 1;
-
-    if(A.date > B.date) return -1;
-
-    return 0;
-});
 
 ---
 
@@ -21,21 +12,28 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
     <div class="Experience-content">
 
         {
-            ORDER_EXPERIENCE.map(({content, date}) => {
+            EXPERIENCE.map((ex) => {
 
-                const {logo, markdown} = content;
-
-                const dateString = date.toLocaleDateString('es-AR', {month: 'long', year: 'numeric'});
+                const startDate = new Date(ex.dates.start).toLocaleDateString('es-AR', {month: 'long', year: 'numeric'});
+                const endDate = ex.dates.end && new Date(ex.dates.end).toLocaleDateString('es-AR', {month: 'long', year: 'numeric'});
 
                 return <div class="Experience-item">
 
                     <div class="Experience-item-info">
    
-                        <h4 class="title">{markdown.frontmatter.title}</h4>
+                        <h4 class="title">{ex.title}</h4>
                     
-                        <p class="date">{dateString}</p>
+                        <p class="date">
+                            <span>{startDate}</span>
+                            {endDate && 
+                                <> - <span>{endDate}</span></>
+                            }
+                        </p>
 
-                        <p class="description">{markdown.frontmatter.description}</p>
+                        {
+                            ex.description && 
+                            <p class="description">{ex.description}</p>
+                        }
     
                     </div>
   
@@ -134,8 +132,14 @@ const ORDER_EXPERIENCE = Object.values(EXPERIENCE).sort((A, B) => {
         font-size: 16px;
         color: var(--text-subtitle);
     }
-    .Experience-item-info .date::first-letter {
-        text-transform: capitalize;
+    .Experience-item-info .date span {
+
+        display: inline-block;
+
+        &::first-letter {
+
+            text-transform: capitalize;
+        }
     }
 
 

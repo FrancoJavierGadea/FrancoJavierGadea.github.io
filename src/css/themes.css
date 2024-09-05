@@ -78,3 +78,15 @@
 
     color-scheme: dark;
 }
+
+
+[theme="blackhole"] .Background .Background-content {
+    
+    backdrop-filter: blur(6px) saturate(220%);
+
+    background: linear-gradient(45deg, #00000089 40%, #00000029 100%);
+
+    @media (max-width: 767.98px) {
+        background: #000000b4;
+    }
+}
