@@ -1,4 +1,6 @@
-
+[theme="light"], [theme="dark"] {
+    --sections-scroll-margin-top: 70px;
+}
 
 [theme="light"] {
     --bs-body-bg: #ffffff;
@@ -9,6 +11,7 @@
 
     --timeline-line-color: #003492;
     --timeline-icon-color: #003492;
+    --timeline-title-color: #000;
 
     --section-border-color: #003492;
 
@@ -38,10 +41,11 @@
 
     --timeline-line-color: #ffffffab;
     --timeline-icon-color: #ffffff;
+    --timeline-title-color: #f3b61f;
 
     --section-border-color: #003492;
 
-    --navigation-navbar-color: #090b0f75;
+    --navigation-navbar-color: #0b0e13;
 
     --card-background: #00000095;
     --card-text-color: #fff;
@@ -62,6 +66,10 @@
     --text-subtitle: #777777;
     --text-emphasis: #f3b61f;
 
+    --timeline-line-color: #ffffffab;
+    --timeline-icon-color: #ffffff;
+    --timeline-title-color: #f3b61f;
+
     --section-border-color: #003492;
 
     --navigation-navbar-color: transparent;
@@ -81,7 +89,7 @@
 
 
 [theme="blackhole"] .Background .Background-content {
-    
+
     backdrop-filter: blur(6px) saturate(220%);
 
     background: linear-gradient(45deg, #00000089 40%, #00000029 100%);
@@ -89,4 +97,12 @@
     @media (max-width: 767.98px) {
         background: #000000b4;
     }
+}
+
+[theme="blackhole"] nav.Navigation {
+    position: static;
+}
+
+[theme="blackhole"] {
+    --sections-scroll-margin-top: 10px;
 }

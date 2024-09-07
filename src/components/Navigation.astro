@@ -4,7 +4,7 @@ import ThemesSwitch from "./ThemesSwitch.astro";
 
 ---
 
-<nav class="navbar navbar-expand-lg">
+<nav class="Navigation navbar navbar-expand-lg">
 
     <div class="container">
         <a class="navbar-brand" href="#"></a>
@@ -60,10 +60,14 @@ import ThemesSwitch from "./ThemesSwitch.astro";
     }
 
     nav {
-        padding: 20px 0;
+        padding: 10px 0;
         margin-bottom: 50px;
 
         background: var(--navigation-navbar-color);
+
+        position: sticky;
+        top: 0;
+        z-index: 10000;
     }
     nav .navbar-nav {
         gap: 20px 50px;

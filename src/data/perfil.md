@@ -2,9 +2,9 @@
 name: "Franco Javier Gadea"
 ---
 
-**Desarrollador web Fullstack** con habilidades en el **frontend** y el **backend**.
+**Desarrollador Web Full Stack** con experiencia en **frontend** y **backend**, enfocado en crear soluciones creativas y escalables que **optimicen** la **experiencia del usuario** y promuevan el crecimiento de los negocios. 
 
-Mi interés en el desarrollo web se centra en crear soluciones **creativas e innovadoras** que mejoren la vida de las personas y hagan crecer los negocios. Me mantengo actualizado en las **últimas tecnologías y tendencias** de industria para crear aplicaciones eficientes y escalables...
+Siempre actualizado con las **últimas tecnologías y tendencias** de la industria, desarrollando aplicaciones **eficientes** y **adaptables** a las necesidades del cliente.
 
-En mi portfolio encontrarás algunos de los proyectos en los que he trabajado, desde aplicaciones web simples hasta complejos juegos en línea. Si buscas un **desarrollador comprometido**, ¡contáctame!
+En mi portfolio encontrarás landing pages y aplicaciones interactivas desarrolladas con **React**, **Astro** y más... Si buscas un **desarrollador comprometido**, ¡contáctame!
 

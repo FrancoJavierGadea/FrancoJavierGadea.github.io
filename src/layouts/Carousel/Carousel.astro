@@ -70,7 +70,7 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
 >
     .Carousel-controls {
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
         gap: 10px;
         padding: 20px 0;
         margin-bottom: 30px;
@@ -92,7 +92,7 @@ const {to = 'left', autoPlay = false, gap = '20px'} = Astro.props;
         transition: scale 0.2s;
     }
     .Carousel-controls .btn:hover i::before {
-        scale: 1.1;
+        scale: 0.9;
     }
 
     .Carousel-content {
