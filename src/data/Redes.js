@@ -1,5 +1,5 @@
 
-import curriculum from "@Data/Curriculum-24-11-23.pdf";
+import curriculum from "@Data/Curriculum.pdf";
 
 export const REDES = [
     {
